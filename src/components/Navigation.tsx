@@ -76,7 +76,6 @@ export function Navigation() {
                 Products
               </span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#ff6730] transition-all duration-300 ease-out group-hover:w-full" />
-              <span className="absolute inset-0 -z-10 bg-[#ff6730]/5 rounded-md scale-0 transition-transform duration-300 ease-out group-hover:scale-100" />
             </a>
             <a 
               href="#about" 
@@ -91,7 +90,6 @@ export function Navigation() {
                 About
               </span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#ff6730] transition-all duration-300 ease-out group-hover:w-full" />
-              <span className="absolute inset-0 -z-10 bg-[#ff6730]/5 rounded-md scale-0 transition-transform duration-300 ease-out group-hover:scale-100" />
             </a>
             <a 
               href="#portfolio" 
@@ -106,7 +104,6 @@ export function Navigation() {
                 Contact
               </span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#ff6730] transition-all duration-300 ease-out group-hover:w-full" />
-              <span className="absolute inset-0 -z-10 bg-[#ff6730]/5 rounded-md scale-0 transition-transform duration-300 ease-out group-hover:scale-100" />
             </a>
           </div>
 
