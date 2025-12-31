@@ -14,6 +14,7 @@ interface PixelTrackerProps {
 export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
   const [pixels, setPixels] = useState<PixelCell[]>([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const gridRef = useRef<HTMLDivElement>(null);
   
   // Responsive pixels per row: 7 on mobile, 13 on desktop
@@ -31,9 +32,17 @@ export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
       }
     };
 
+    const handleMouseMove = (e: MouseEvent) => {
+      setCursorPos({ x: e.clientX, y: e.clientY });
+    };
+
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, [containerRef]);
 
   useEffect(() => {
@@ -119,36 +128,27 @@ export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
     return pixel.x < midpoint ? 'rgba(255, 103, 48, 0.2)' : 'rgba(156, 163, 175, 0.4)';
   };
 
-  // Calculate diagonal animation delay based on position
+  // Calculate animation delay based on distance from center
   const getAnimationDelay = (pixel: PixelCell) => {
     const PIXELS_PER_ROW = getPixelsPerRow();
-    const midpoint = Math.floor(PIXELS_PER_ROW / 2);
+    const rows = Math.ceil(dimensions.height / Math.ceil(dimensions.width / PIXELS_PER_ROW));
     
-    if (pixel.x < midpoint) {
-      // Left half (orange): diagonal from bottom-right to top-left
-      const distanceFromRight = midpoint - 1 - pixel.x;
-      const diagonal = distanceFromRight + pixel.y;
-      return diagonal * 20; // 20ms per diagonal step
-    } else {
-      // Right half (gray): diagonal from bottom-left to top-right
-      const distanceFromLeft = pixel.x - midpoint;
-      const diagonal = distanceFromLeft + pixel.y;
-      return diagonal * 20; // 20ms per diagonal step
-    }
+    // Calculate center of the grid
+    const centerX = PIXELS_PER_ROW / 2;
+    const centerY = rows / 2;
+    
+    // Calculate distance from center using Euclidean distance
+    const distance = Math.sqrt(
+      Math.pow(pixel.x - centerX, 2) + 
+      Math.pow(pixel.y - centerY, 2)
+    );
+    
+    return distance * 30; // 30ms per unit of distance
   };
 
-  // Get animation direction based on position
+  // Get animation direction - scale from center
   const getAnimationTransform = (pixel: PixelCell, revealed: boolean) => {
-    const PIXELS_PER_ROW = getPixelsPerRow();
-    const midpoint = Math.floor(PIXELS_PER_ROW / 2);
-    
-    if (pixel.x < midpoint) {
-      // Left half: slide from bottom-right
-      return revealed ? 'translate(0%, 0%)' : 'translate(100%, 100%)';
-    } else {
-      // Right half: slide from bottom-left
-      return revealed ? 'translate(0%, 0%)' : 'translate(-100%, 100%)';
-    }
+    return revealed ? 'scale(1)' : 'scale(0)';
   };
 
   const PIXELS_PER_ROW = getPixelsPerRow();
@@ -156,6 +156,28 @@ export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
 
   return (
     <>
+      {/* Cursor Pulse Animation */}
+      <div
+        className="fixed pointer-events-none z-50"
+        style={{
+          left: cursorPos.x,
+          top: cursorPos.y,
+          transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <div className="relative w-8 h-8">
+          {/* Pulsing ring */}
+          <div
+            className="absolute inset-0 rounded-full bg-orange-500 opacity-40 animate-ping"
+            style={{
+              animationDuration: '1.5s',
+            }}
+          />
+          {/* Static center dot */}
+          <div className="absolute inset-0 m-auto w-2 h-2 rounded-full bg-orange-500" />
+        </div>
+      </div>
+
       {/* Pixel Grid Overlay */}
       <div 
         ref={gridRef}
@@ -180,7 +202,7 @@ export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
               }}
               onMouseLeave={() => handlePixelLeave(pixel.x, pixel.y)}
             >
-              {/* Animated color reveal with mirrored diagonal animations */}
+              {/* Animated color reveal from center outward */}
               <div
                 className="absolute inset-0 transition-all duration-[800ms] ease-out"
                 style={{
