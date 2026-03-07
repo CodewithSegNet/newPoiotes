@@ -10,8 +10,11 @@ import ads from "../assets/IMG.mp4"
 export function PoietesDifference() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isVideoInView, setIsVideoInView] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -19,6 +22,28 @@ export function PoietesDifference() {
       setIsMuted(!isMuted);
     }
   };
+
+  // Lazy load: only play video when it scrolls into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVideoInView(true);
+          if (videoRef.current && isVideoLoaded) {
+            videoRef.current.play().catch(() => {});
+          }
+        } else {
+          setIsVideoInView(false);
+          if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (videoContainerRef.current) observer.observe(videoContainerRef.current);
+    return () => { if (videoContainerRef.current) observer.unobserve(videoContainerRef.current); };
+  }, [isVideoLoaded]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -126,20 +151,43 @@ export function PoietesDifference() {
             </a>
           </div>
           {/* Video cell - right (partial on desktop, fills container on mobile) */}
-          <div className="relative border-t md:border-t-0 w-full sm:w-[250px] md:w-[320px] h-[280px] sm:h-[320px] md:h-[380px] border-l-0 md:border-l border-[#E5E5E5] overflow-hidden">
+          <div ref={videoContainerRef} className="relative border-t md:border-t-0 w-full sm:w-[250px] md:w-[320px] h-[280px] sm:h-[320px] md:h-[380px] border-l-0 md:border-l border-[#E5E5E5] overflow-hidden">
+            {/* Loading skeleton */}
+            <div className={`absolute inset-0 z-[5] flex items-center justify-center bg-gray-100 transition-opacity duration-500 ${
+              isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}>
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse" />
+              <div className="relative flex flex-col items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center shadow-sm">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 5v14l11-7z" fill="#FF6730" />
+                  </svg>
+                </div>
+                <span className="text-xs text-gray-400 font-cabinet">Loading video...</span>
+              </div>
+            </div>
+
             <video
               ref={videoRef}
               src={ads}
-              autoPlay
               loop
               muted
               playsInline
+              preload="auto"
+              onLoadedData={() => {
+                setIsVideoLoaded(true);
+                if (isVideoInView && videoRef.current) {
+                  videoRef.current.play().catch(() => {});
+                }
+              }}
               className="w-full h-full object-cover my-2 ml-2 md:absolute md:inset-0"
             />
             {/* Mute/Unmute toggle */}
             <button
               onClick={toggleMute}
-              className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all duration-200 z-10"
+              className={`absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all duration-200 z-10 ${
+                isVideoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
               aria-label={isMuted ? 'Unmute' : 'Mute'}
             >
               {isMuted ? (
