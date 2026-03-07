@@ -4,7 +4,7 @@ const faqs = [
   {
     question: 'Who is Poietes',
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at arcu sit risus varius malesuada in sed purus. Aliquam erat ante venenatis, efficitur maximus a, blandit elit. Pellentesque et iaculis nisl in Poietes.',
+      'Poietes is a full-service software development agency specializing in custom web development, mobile app development, cloud infrastructure, and AI-powered solutions. We partner with startups and enterprises to build scalable, high-performance digital products that drive business growth and deliver exceptional user experiences.',
   },
   {
     question: 'What does Poietes do',

@@ -19,16 +19,19 @@ export function TechCompanySection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const runwayRef = useRef<HTMLDivElement>(null);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeCard, setActiveCard] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
-  // Track screen size for responsive card widths
+  // Track screen size
   useEffect(() => {
     const checkSize = () => {
       setIsMobile(window.innerWidth < 640);
-      setIsTablet(window.innerWidth >= 640 && window.innerWidth < 1024);
+      setIsTablet(window.innerWidth >= 640 && window.innerWidth < 768);
+      setIsDesktop(window.innerWidth >= 768);
     };
     checkSize();
     window.addEventListener('resize', checkSize);
@@ -47,26 +50,43 @@ export function TechCompanySection() {
     return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
   }, []);
 
-  // Scroll-linked horizontal slide
+  // Desktop: scroll-linked horizontal slide
   const handleScroll = useCallback(() => {
-    if (!runwayRef.current) return;
+    if (!runwayRef.current || !isDesktop) return;
     const rect = runwayRef.current.getBoundingClientRect();
     const runwayHeight = runwayRef.current.offsetHeight;
     const viewportHeight = window.innerHeight;
 
-    // How far we've scrolled into the runway (0 = top just entered, 1 = bottom leaving)
     const scrolled = -rect.top;
     const maxScroll = runwayHeight - viewportHeight;
     const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
 
     setScrollProgress(progress);
     setActiveCard(Math.min(4, Math.floor(progress * 5)));
-  }, []);
+  }, [isDesktop]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
+
+  // Mobile: track which card is visible via scroll snap
+  useEffect(() => {
+    if (isDesktop || !mobileTrackRef.current) return;
+    const track = mobileTrackRef.current;
+
+    const handleMobileScroll = () => {
+      const scrollLeft = track.scrollLeft;
+      const cardW = track.firstElementChild
+        ? (track.firstElementChild as HTMLElement).offsetWidth + 16 // card width + gap
+        : 296;
+      const idx = Math.round(scrollLeft / cardW);
+      setActiveCard(Math.min(4, Math.max(0, idx)));
+    };
+
+    track.addEventListener('scroll', handleMobileScroll, { passive: true });
+    return () => track.removeEventListener('scroll', handleMobileScroll);
+  }, [isDesktop]);
 
   const services = [
     {
@@ -75,7 +95,7 @@ export function TechCompanySection() {
       ),
       tag: 'We Build',
       title: 'Custom Software Development',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at nulla in fermentum urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ultricis at. Aiquam in hendrerit urna.',
+      description: 'From enterprise web applications to cross-platform mobile apps, we architect and engineer custom software solutions tailored to your business goals. Our full-stack development team delivers clean, scalable code with modern frameworks and cloud-native technologies.',
       image: cardone,
       imagePosition: 'bottom' as const,
       gradient: 'radial-gradient(ellipse at bottom left, rgba(253, 198, 10, 0.4) 0%, transparent 50%)',
@@ -133,13 +153,90 @@ export function TechCompanySection() {
     },
   ];
 
-  // Calculate how much to translate the card track based on scroll progress
-  const cardWidth = isMobile ? 280 : isTablet ? 340 : 400; // responsive px per card
-  const cardGap = 16; // gap between cards
-  const totalTrackWidth = services.length * (cardWidth + cardGap) - cardGap;
+  // Desktop: calculate translation for scroll-driven animation
+  const desktopCardWidth = 400;
+  const cardGap = 16;
+  const totalTrackWidth = services.length * (desktopCardWidth + cardGap) - cardGap;
   const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-  const maxTranslate = Math.max(0, totalTrackWidth - viewportWidth + 80); // 80px padding
+  const maxTranslate = Math.max(0, totalTrackWidth - viewportWidth + 80);
   const translateX = -scrollProgress * maxTranslate;
+
+  // Responsive card sizes
+  const mobileCardWidth = isMobile ? 280 : 340; // 280 phone, 340 tablet
+  const mobileCardHeight = isMobile ? '510px' : '470px';
+
+  // Shared card renderer
+  const renderCard = (service: typeof services[0], index: number, isMobileCard: boolean) => (
+    <div
+      key={index}
+      className="flex flex-col items-center flex-shrink-0"
+      style={{ width: isMobileCard ? `${mobileCardWidth}px` : `${desktopCardWidth}px` }}
+    >
+      {/* Card */}
+      <div
+        className={`rounded-2xl pt-8 px-8 flex flex-col justify-between relative overflow-hidden border border-white/5 w-full transition-all duration-500 ${
+          !isMobileCard
+            ? activeCard === index ? 'border-white/15 scale-[1.02]' : 'opacity-70 scale-100'
+            : 'border-white/10'
+        }`}
+        style={{
+          height: isMobileCard ? mobileCardHeight : '520px',
+          background: service.gradient,
+          opacity: isVisible ? (isMobileCard ? 1 : activeCard === index ? 1 : 0.7) : 0,
+          transform: isVisible
+            ? isMobileCard ? 'translateY(0)' : `translateY(0) scale(${activeCard === index ? 1.02 : 1})`
+            : 'translateY(30px)',
+          transition: `opacity 0.5s ease-out, transform 0.5s ease-out`,
+        }}
+      >
+        {service.imagePosition === 'top' && (
+          <div className="w-full rounded-xl overflow-hidden mb-4">
+            <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+          </div>
+        )}
+
+        <div className="flex-1">
+          <div className="mb-3">{service.icon}</div>
+
+          {service.tag && (
+            <div className="inline-flex items-center gap-1 bg-white/10 rounded-full px-3 py-1 mb-3">
+              <span className="text-white text-xs font-cabinet">{service.tag}</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          )}
+
+          <h3 className="font-cabinet font-bold text-lg md:text-xl text-white mb-2">
+            {service.title}
+          </h3>
+
+          <p className="text-white/50 text-xs leading-relaxed mb-3">
+            {service.description}
+          </p>
+
+          <a href="#" className="text-[#FF6730] text-sm font-cabinet hover:underline">
+            Learn More
+          </a>
+        </div>
+
+        {service.imagePosition === 'bottom' && (
+          <div className="w-full rounded-xl overflow-hidden mt-4">
+            <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+          </div>
+        )}
+      </div>
+
+      {/* Card number */}
+      <div className={`mt-5 w-10 h-10 rounded-full flex items-center justify-center text-sm font-cabinet font-semibold transition-all duration-400 ${
+        activeCard === index
+          ? 'bg-[#FF6730] text-white scale-110'
+          : 'border border-white/30 text-white/50 scale-100'
+      }`}>
+        {String(index + 1).padStart(2, '0')}
+      </div>
+    </div>
+  );
 
   return (
     <section ref={sectionRef} className="relative w-full overflow-visible z-10">
@@ -152,9 +249,9 @@ export function TechCompanySection() {
         </div>
       </div>
 
-      {/* Main dark content area — this wraps everything including the scroll runway */}
+      {/* Main dark content area */}
       <div className="bg-black relative">
-        {/* Heading — always visible at top */}
+        {/* Heading */}
         <div className="text-center pt-16 pb-4 max-w-2xl mx-auto px-6">
           <h2
             className="font-cabinet md:mt-[7rem] font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-4"
@@ -180,107 +277,71 @@ export function TechCompanySection() {
           </p>
         </div>
 
-        {/* ══════ SCROLL RUNWAY — tall container that drives the horizontal scroll ══════ */}
-        <div ref={runwayRef} className="relative h-[200vh] sm:h-[250vh] md:h-[300vh]">
-          {/* Sticky viewport — pins to screen while user scrolls through runway */}
-          <div
-            ref={stickyRef}
-            className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center"
-          >
-            {/* Horizontal card track */}
+        {/* ══════ MOBILE / TABLET: Swipeable horizontal slider ══════ */}
+        {!isDesktop && (
+          <div className="py-10">
             <div
-              className="flex gap-4 pl-4 sm:pl-10 md:pl-20 transition-transform duration-100 ease-out items-stretch"
-              style={{ transform: `translateX(${translateX}px)` }}
+              ref={mobileTrackRef}
+              className="flex gap-4 px-6 overflow-x-auto pb-6 hide-scrollbar"
+              style={{
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+              }}
             >
               {services.map((service, index) => (
-                <div key={index} className="flex flex-col items-center flex-shrink-0" style={{ width: `${cardWidth}px` }}>
-                  {/* Card */}
-                  <div
-                    className={`rounded-2xl pt-8 px-8 flex flex-col justify-between relative overflow-hidden border border-white/5 w-full transition-all duration-500 ${
-                      activeCard === index ? 'border-white/15 scale-[1.02]' : 'opacity-70 scale-100'
-                    }`}
-                    style={{
-                      height: isMobile ? '420px' : isTablet ? '470px' : '520px',
-                      background: service.gradient,
-                      opacity: isVisible ? (activeCard === index ? 1 : 0.7) : 0,
-                      transform: isVisible
-                        ? `translateY(0) scale(${activeCard === index ? 1.02 : 1})`
-                        : 'translateY(30px)',
-                      transition: `opacity 0.5s ease-out, transform 0.5s ease-out`,
-                    }}
-                  >
-                    {service.imagePosition === 'top' && (
-                      <div className="w-full rounded-xl overflow-hidden mb-4">
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    )}
-
-                    <div className="flex-1">
-                      {/* Icon */}
-                      <div className="mb-3">{service.icon}</div>
-
-                      {/* Tag */}
-                      {service.tag && (
-                        <div className="inline-flex items-center gap-1 bg-white/10 rounded-full px-3 py-1 mb-3">
-                          <span className="text-white text-xs font-cabinet">{service.tag}</span>
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                            <path d="M5 12h14M12 5l7 7-7 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </div>
-                      )}
-
-                      {/* Title */}
-                      <h3 className="font-cabinet font-bold text-lg md:text-xl text-white mb-2">
-                        {service.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-white/50 text-xs leading-relaxed mb-3">
-                        {service.description}
-                      </p>
-
-                      {/* Learn More */}
-                      <a href="#" className="text-[#FF6730] text-sm font-cabinet hover:underline">
-                        Learn More
-                      </a>
-                    </div>
-
-                    {service.imagePosition === 'bottom' && (
-                      <div className="w-full rounded-xl overflow-hidden mt-4">
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Individual card number */}
-                  <div className={`mt-5 w-10 h-10 rounded-full flex items-center justify-center text-sm font-cabinet font-semibold transition-all duration-400 ${
-                    activeCard === index
-                      ? 'bg-[#FF6730] text-white scale-110'
-                      : 'border border-white/30 text-white/50 scale-100'
-                  }`}>
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
+                <div
+                  key={index}
+                  style={{ scrollSnapAlign: 'center' }}
+                >
+                  {renderCard(service, index, true)}
                 </div>
               ))}
             </div>
 
-            {/* Scroll progress bar */}
-            {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-48 h-1 bg-white/10 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-[#FF6730] rounded-full transition-all duration-150 ease-out"
-                style={{ width: `${scrollProgress * 100}%` }}
-              />
-            </div> */}
+            {/* Dot indicators */}
+            <div className="flex justify-center gap-2 mt-2">
+              {services.map((_, index) => (
+                <button
+                  key={index}
+                  className={`rounded-full transition-all duration-300 ${
+                    activeCard === index
+                      ? 'w-6 h-2 bg-[#FF6730]'
+                      : 'w-2 h-2 bg-white/30'
+                  }`}
+                  onClick={() => {
+                    if (mobileTrackRef.current) {
+                      const cardW = mobileCardWidth + 16; // card width + gap
+                      mobileTrackRef.current.scrollTo({
+                        left: index * cardW,
+                        behavior: 'smooth',
+                      });
+                    }
+                  }}
+                  aria-label={`Go to card ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* ══════ DESKTOP: Scroll-driven horizontal animation ══════ */}
+        {isDesktop && (
+          <div ref={runwayRef} className="relative h-[300vh]">
+            <div
+              ref={stickyRef}
+              className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center"
+            >
+              <div
+                className="flex gap-4 pl-20 transition-transform duration-100 ease-out items-stretch"
+                style={{ transform: `translateX(${translateX}px)` }}
+              >
+                {services.map((service, index) => renderCard(service, index, false))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Bottom curved transition to white */}

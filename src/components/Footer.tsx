@@ -14,11 +14,10 @@ export function Footer() {
           <div className="flex flex-col gap-5">
             <img src={Logo} alt="Poietes" className="w-40" />
             <p className="text-white/60 text-xs leading-relaxed max-w-[260px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              dapibus lacus non augue gravida viverra. Praesent nulla quam,
-              aliquet ac urna ac, ullamcorper mattis ligula. Proin quis tempor
-              dui, quis tristique ipsum. Nullam odio ligula, pharetra id massa
-              ac, vulputate ornare erat.
+              Poietes is a premium software development company delivering
+              custom web applications, mobile apps, cloud solutions, and
+              AI-powered systems for ambitious businesses worldwide. We build
+              software that scales with your vision.
             </p>
           </div>
 
@@ -322,20 +321,18 @@ export function Footer() {
         {/* ─── Bottom Description ─── */}
         <div className="mt-8 border-t border-white/10 pt-6">
           <p className="text-white/30 text-[10px] leading-relaxed">
-            Poietes is Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Curabitur dapibus lacus non augue gravida viverra. Praesent nulla
-            quam, aliquet ac urna ac, ullamcorper mattis ligula. Proin quis
-            tempor dui, quis tristique ipsum. Nullam odio ligula, pharetra id
-            massa ac, vulputate ornare erat. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Curabitur dapibus lacus non augue
-            gravida viverra. Praesent nulla quam, aliquet ac urna ac,
-            ullamcorper mattis ligula. Proin quis tempor dui, quis tristique
-            ipsum. Nullam odio ligula, pharetra id massa ac, vulputate ornare
-            erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Curabitur dapibus lacus non augue gravida viverra. Praesent nulla
-            quam, aliquet ac urna ac, ullamcorper mattis ligula. Proin quis
-            tempor dui, quis tristique ipsum. Nullam odio ligula, pharetra id
-            massa ac, vulputate ornare erat.
+            Poietes is a registered software development company providing
+            end-to-end digital product engineering services including custom
+            software development, web application development, mobile app
+            development (iOS & Android), cloud computing and DevOps, UI/UX
+            product design, artificial intelligence and machine learning
+            integration, e-commerce solutions, SaaS platform development,
+            API development and third-party integrations, and technology
+            consulting. We serve clients across fintech, healthcare,
+            real estate, logistics, and enterprise sectors globally.
+            All services are delivered with industry-standard security
+            compliance, comprehensive documentation, and ongoing
+            maintenance support.
           </p>
         </div>
       </div>

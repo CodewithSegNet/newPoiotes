@@ -84,6 +84,15 @@ html, body{
       overflow-x: clip;
 }
 
+/* Hide scrollbar on mobile card slider */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @layer base {
   *, :after, :before, ::backdrop {
     box-sizing: border-box;
