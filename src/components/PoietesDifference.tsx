@@ -23,13 +23,13 @@ export function PoietesDifference() {
     }
   };
 
-  // Lazy load: only play video when it scrolls into view
+  // Lazy load: pause/resume video based on visibility
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVideoInView(true);
-          if (videoRef.current && isVideoLoaded) {
+          if (videoRef.current) {
             videoRef.current.play().catch(() => {});
           }
         } else {
@@ -39,11 +39,11 @@ export function PoietesDifference() {
           }
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
     if (videoContainerRef.current) observer.observe(videoContainerRef.current);
     return () => { if (videoContainerRef.current) observer.unobserve(videoContainerRef.current); };
-  }, [isVideoLoaded]);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -170,13 +170,18 @@ export function PoietesDifference() {
             <video
               ref={videoRef}
               src={ads}
+              autoPlay
               loop
               muted
               playsInline
+              // @ts-ignore — needed for older iOS
+              webkit-playsinline=""
               preload="auto"
               onLoadedData={() => {
                 setIsVideoLoaded(true);
-                if (isVideoInView && videoRef.current) {
+              }}
+              onCanPlay={() => {
+                if (videoRef.current) {
                   videoRef.current.play().catch(() => {});
                 }
               }}
