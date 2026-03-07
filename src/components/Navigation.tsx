@@ -73,9 +73,9 @@ export function Navigation() {
  
           {/* Divider - Grow from center */}
 <div 
-  className='hidden md:block w-[2px] h-[11.88px] bg-primary origin-center'
+  className='hidden md:block w-[2px] h-[11.88px] bg-primary origin-center transition-opacity duration-300'
   style={{
-    opacity: isVisible ? 1 : 0,
+    opacity: isVisible && !isMobileMenuOpen ? 1 : 0,
     transform: isVisible ? 'scaleY(1)' : 'scaleY(0)',
     transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s',
   }}
@@ -84,7 +84,9 @@ export function Navigation() {
 </div>
 
          {/* Navigation Links - Staggered fade in from top */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className={`hidden md:flex items-center gap-8 transition-all duration-300 ${
+              isMobileMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
+            }`}>
               
               {navLinks.map((link, index) => (
                 <Link
@@ -92,8 +94,8 @@ export function Navigation() {
                   to={link.to}
                   className="text-black font-normal text-sm !font-cabinet relative group"
                   style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateY(0)' : 'translateY(-10px)',
+                    opacity: isVisible && !isMobileMenuOpen ? 1 : 0,
+                    transform: isVisible && !isMobileMenuOpen ? 'translateY(0)' : 'translateY(-10px)',
                     transition: `all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.3 + index * 0.1}s`,
                   }}
                 >
@@ -159,7 +161,7 @@ export function Navigation() {
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <div className="flex flex-col pt-24 px-8">
+          <div className="flex flex-col pt-32 px-8">
             {navLinks.map((link, index) => (
               <Link
                 key={link.label}
