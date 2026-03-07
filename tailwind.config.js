@@ -14,6 +14,7 @@ export default {
       },
 fontFamily: {
   'cabinet': ['Cabinet Grotesk', 'sans-serif'],
+  'satoshi': ['Satoshi', 'sans-serif'],
   'montserrat': ['Montserrat', 'sans-serif'],
 },
       fontWeight: {

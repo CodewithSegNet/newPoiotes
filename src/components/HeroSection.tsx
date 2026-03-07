@@ -18,7 +18,7 @@ export function HeroSection() {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex  items-center justify-center px-8 pb-20 bg-gradient-to-br from-white via-[#fff8f0] to-white overflow-hidden"
+      className="relative md:min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20 bg-gradient-to-br from-white via-[#fff8f0] to-white overflow-hidden"
     >
       {/* Pixel Grid - only in hero section, lower z-index */}
       <div className="absolute inset-0 z-[9997]">
@@ -26,7 +26,7 @@ export function HeroSection() {
       </div>
       
       {/* Content - higher z-index */}
-      <div className="relative z-[10000] py-6 mt-14 w-full max-w-4xl flex flex-col gap-[19.109px] items-center">
+      <div className="relative z-[10000] py-6 mt-8 sm:mt-10 lg:mt-14 w-full max-w-4xl flex flex-col gap-3 sm:gap-[19.109px] items-center">
         {/* Badge - Slide down with bounce */}
         <div 
           className="bg-[rgba(253,198,10,0.02)] flex flex-col items-start overflow-clip px-[5.35px] py-[6.879px] rounded-[26.752px] group cursor-pointer"
@@ -54,7 +54,7 @@ export function HeroSection() {
                 </p>
               </div>
               <p className="font-cabinet leading-[normal] not-italic text-[#fdc60a] text-[12.172px] text-center text-nowrap transition-all duration-300 ease-out">
-                Poietes is here with the best properties listings 🔥
+                Poietes is here with the best experience 🔥
               </p>
             </div>
             <div 
@@ -74,7 +74,7 @@ export function HeroSection() {
 
         {/* Heading - Fade in with scale and blur */}
         <h1 
-          className="font-cabinet leading-[56.505px] not-italic text-[#282323] text-[55.918px] text-center"
+          className="font-cabinet leading-tight sm:leading-[42px] lg:leading-[56.505px] not-italic text-[#282323] text-[28px] sm:text-[40px] lg:text-[55.918px] text-center"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.98)',
@@ -106,7 +106,7 @@ export function HeroSection() {
 
         {/* Description - Fade in from bottom */}
         <p 
-          className="font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-[#818181] text-[12.23px] max-w-[477.447px] text-center"
+          className="font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-[#818181] text-[11px] sm:text-[12.23px] max-w-full sm:max-w-[477.447px] text-center px-2 sm:px-0"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -117,9 +117,9 @@ export function HeroSection() {
         </p>
 
         {/* Buttons - Slide in from sides */}
-        <div className="flex gap-[7.644px] items-center">
+        <div className="flex sm:flex-row justify-center gap-3 sm:gap-[7.644px] items-center w-full sm:w-auto px-4 sm:px-0">
           <button 
-            className="flex items-center justify-center px-[27.931px] py-[16.465px] rounded-[76.435px] bg-[#fdc60a] relative overflow-hidden group"
+            className="flex items-center justify-center px-[15px] py-[12px] md:px-[27.931px] md:py-[16.465px] rounded-[76.435px] bg-[#fdc60a] relative overflow-hidden group"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0) scale(1)' : 'translateX(-30px) scale(0.9)',
@@ -135,7 +135,7 @@ export function HeroSection() {
             </div>
           </button>
           <button 
-            className="flex items-center justify-center px-[27.931px] py-[16.465px] rounded-[76.435px] bg-[#ff6730] relative overflow-hidden group"
+            className="flex items-center justify-center px-[15px] py-[12px] md:px-[27.931px] md:py-[16.465px] rounded-[76.435px] bg-[#ff6730] relative overflow-hidden group"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0) scale(1)' : 'translateX(30px) scale(0.9)',

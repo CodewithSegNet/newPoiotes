@@ -80,6 +80,10 @@
   }
 }
 
+html, body{
+      overflow-x: clip;
+}
+
 @layer base {
   *, :after, :before, ::backdrop {
     box-sizing: border-box;

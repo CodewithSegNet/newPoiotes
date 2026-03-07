@@ -15,7 +15,9 @@ export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
   const [pixels, setPixels] = useState<PixelCell[]>([]);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
+  const [isInsideContainer, setIsInsideContainer] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   
   // Responsive pixels per row: 7 on mobile, 13 on desktop
   const getPixelsPerRow = () => {
@@ -33,7 +35,24 @@ export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      setCursorPos({ x: e.clientX, y: e.clientY });
+      // Calculate position relative to the wrapper/container
+      const wrapper = wrapperRef.current || containerRef?.current;
+      if (wrapper) {
+        const rect = wrapper.getBoundingClientRect();
+        const isInside = (
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom
+        );
+        setIsInsideContainer(isInside);
+        if (isInside) {
+          setCursorPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+        }
+      } else {
+        setCursorPos({ x: e.clientX, y: e.clientY });
+        setIsInsideContainer(true);
+      }
     };
 
     updateDimensions();
@@ -155,28 +174,30 @@ export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
   const PIXEL_SIZE = Math.ceil(dimensions.width / PIXELS_PER_ROW);
 
   return (
-    <>
-      {/* Cursor Pulse Animation */}
-      <div
-        className="fixed pointer-events-none z-50"
-        style={{
-          left: cursorPos.x,
-          top: cursorPos.y,
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        <div className="relative w-8 h-8">
-          {/* Pulsing ring */}
-          <div
-            className="absolute inset-0 rounded-full bg-orange-500 opacity-40 animate-ping"
-            style={{
-              animationDuration: '1.5s',
-            }}
-          />
-          {/* Static center dot */}
-          <div className="absolute inset-0 m-auto w-2 h-2 rounded-full bg-orange-500" />
+    <div ref={wrapperRef} className="absolute inset-0">
+      {/* Cursor Pulse Animation — scoped to container */}
+      {isInsideContainer && (
+        <div
+          className="absolute pointer-events-none z-50"
+          style={{
+            left: cursorPos.x,
+            top: cursorPos.y,
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          <div className="relative w-8 h-8">
+            {/* Pulsing ring */}
+            <div
+              className="absolute inset-0 rounded-full bg-orange-500 opacity-40 animate-ping"
+              style={{
+                animationDuration: '1.5s',
+              }}
+            />
+            {/* Static center dot */}
+            <div className="absolute inset-0 m-auto w-2 h-2 rounded-full bg-orange-500" />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Pixel Grid Overlay */}
       <div 
@@ -216,6 +237,6 @@ export function PixelTracker({ containerRef }: PixelTrackerProps = {}) {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }
