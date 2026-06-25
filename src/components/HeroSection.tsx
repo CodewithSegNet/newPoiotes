@@ -52,7 +52,7 @@ export function HeroSection() {
                   </div>
                   
                   <span className="relative z-10 font-mono tracking-wider font-semibold text-[9px] sm:text-[10px] md:text-[12.172px] text-[#fdc60a] whitespace-nowrap">
-                    Software Development & Growth Engineering <span className="mx-2 text-[#fdc60a]/40">—</span> Now Accepting Partners
+                    Building Scalable Digital Products <span className="mx-2 text-[#fdc60a]/40">—</span> Now Accepting Partners
                   </span>
                 </div>
                 <div className="size-3 transition-transform duration-500 ease-out group-hover:translate-x-1 shrink-0">
