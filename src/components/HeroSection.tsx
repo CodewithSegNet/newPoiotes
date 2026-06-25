@@ -27,48 +27,43 @@ export function HeroSection() {
       
       {/* Content - higher z-index */}
       <div className="relative z-[10000] py-6 mt-8 sm:mt-10 lg:mt-14 w-full max-w-4xl flex flex-col gap-3 sm:gap-[19.109px] items-center">
-        {/* Badge - Slide down with bounce */}
         <div 
-          className="bg-[rgba(253,198,10,0.02)] flex flex-col items-start overflow-clip px-[5.35px] py-[6.879px] rounded-[26.752px] group cursor-pointer"
+          className="bg-[rgba(253,198,10,0.02)] border border-[#fdc60a]/10 relative overflow-hidden px-3 py-[6px] rounded-full group cursor-pointer w-[280px] sm:w-[400px] md:w-[500px]"
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(-30px) scale(0.9)',
-            transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s',
+            transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(-20px) scale(0.95)',
+            transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s',
           }}
         >
-          <div className="flex gap-[7.644px] items-center">
-            <div className="flex gap-[9.172px] items-center">
-              <div 
-                className="bg-[rgba(253,198,10,0.1)] flex flex-col items-center justify-center px-[6.115px] py-[4.586px] rounded-[76.435px] transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-[rgba(253,198,10,0.15)]"
-                style={{
-                  animation: isVisible ? 'pulse-glow 2s ease-in-out infinite' : 'none',
-                }}
-              >
-                <p 
-                  className="font-cabinet leading-[normal] not-italic text-[#fdc60a] text-[10px] md:text-[13.172px] text-center text-nowrap transition-transform duration-300 ease-out"
-                  style={{
-                    animation: isVisible ? 'bounce-subtle 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s' : 'none',
-                  }}
-                >
-                  🎉 2026
-                </p>
+          <div 
+            className="flex w-max"
+            style={{
+              animation: isVisible ? 'marquee-rtl 30s linear infinite' : 'none',
+            }}
+          >
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex gap-6 items-center px-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1.5 px-2 py-[2px] rounded-md border border-[#fdc60a]/20 bg-[#fdc60a]/[0.03]">
+                    <div className="size-1 rounded-sm bg-[#fdc60a]"></div>
+                    <span className="text-[10px] font-mono tracking-widest text-[#fdc60a] font-semibold mt-[1px]">
+                      2026
+                    </span>
+                  </div>
+                  
+                  <span className="relative z-10 font-mono tracking-wider font-semibold text-[9px] sm:text-[10px] md:text-[12.172px] text-[#fdc60a] whitespace-nowrap">
+                    Software Development & Growth Engineering <span className="mx-2 text-[#fdc60a]/40">—</span> Now Accepting Partners
+                  </span>
+                </div>
+                <div className="size-3 transition-transform duration-500 ease-out group-hover:translate-x-1 shrink-0">
+                  <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 9.1722 9.1722">
+                    <g>
+                      <path d={svgPaths.p374c1a80} fill="#fdc60a" />
+                    </g>
+                  </svg>
+                </div>
               </div>
-              <span className="relative z-10 font-mono tracking-wider font-semibold text-[9px] sm:text-[10px] md:text-[12.172px] text-[#fdc60a]">
-                Software Development & Growth Engineering — Now Accepting Partners 🔥
-              </span>
-            </div>
-            <div 
-              className="size-[12.172px] transition-transform duration-500 ease-out group-hover:translate-x-2"
-              style={{
-                animation: isVisible ? 'beat 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none',
-              }}
-            >
-              <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 9.1722 9.1722">
-                <g>
-                  <path d={svgPaths.p374c1a80} fill="var(--fill-0, #FDC60A)" />
-                </g>
-              </svg>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -191,6 +186,15 @@ export function HeroSection() {
           }
           to {
             transform: rotate(360deg);
+          }
+        }
+
+        @keyframes marquee-rtl {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
           }
         }
       `}</style>
