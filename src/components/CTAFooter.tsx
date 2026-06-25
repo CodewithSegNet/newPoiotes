@@ -53,6 +53,7 @@ export function CTAFooter() {
           </div>
         </div>
 
+
         {/* Right — Mascot, pinned to bottom-right, independent of text flow */}
         <div className="absolute bottom-[-90px] sm:bottom-[-220px] md:bottom-[-250px] lg:bottom-[-280px] right-0 z-[2]">
           <img
