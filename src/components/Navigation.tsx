@@ -107,59 +107,59 @@ export function Navigation() {
       title: 'Estate Management',
       description: 'Property and estate management solutions.',
       items: [
-        {
-          name: 'EstateFlow',
-          description: 'Property Management System',
-          icon: (
-            <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center flex-shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6730" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-            </div>
-          ),
-          link: '/products/estateflow',
-        },
+        // {
+        //   name: 'EstateFlow',
+        //   description: 'Property Management System',
+        //   icon: (
+        //     <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center flex-shrink-0">
+        //       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6730" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        //         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        //         <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        //       </svg>
+        //     </div>
+        //   ),
+        //   link: '/products/estateflow',
+        // },
       ],
     },
     Mailing: {
       title: 'Mailing Solutions',
       description: 'Communication and outreach tools.',
       items: [
-        {
-          name: 'MailCraft',
-          description: 'Email Campaign Manager',
-          icon: (
-            <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center flex-shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6730" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-            </div>
-          ),
-          link: '/products/mailcraft',
-        },
+        // {
+        //   name: 'MailCraft',
+        //   description: 'Email Campaign Manager',
+        //   icon: (
+        //     <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center flex-shrink-0">
+        //       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6730" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        //         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        //         <polyline points="22,6 12,13 2,6"></polyline>
+        //       </svg>
+        //     </div>
+        //   ),
+        //   link: '/products/mailcraft',
+        // },
       ],
     },
     Procurement: {
-      title: 'Procurement Tools',
-      description: 'Streamline purchasing and vendor management.',
+      title: 'Procurement Solutions',
+      description: 'Streamline your purchasing and supply chain.',
       items: [
-        {
-          name: 'ProcureHub',
-          description: 'Procurement Automation',
-          icon: (
-            <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center flex-shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6730" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-              </svg>
-            </div>
-          ),
-          link: '/products/procurehub',
-        },
+        // {
+        //   name: 'ProcureHub',
+        //   description: 'Procurement Automation',
+        //   icon: (
+        //     <div className="w-10 h-10 rounded-lg bg-[#F3F4F6] flex items-center justify-center flex-shrink-0">
+        //       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF6730" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        //         <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+        //         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+        //         <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+        //         <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        //       </svg>
+        //     </div>
+        //   ),
+        //   link: '/products/procurehub',
+        // },
       ],
     },
   };
