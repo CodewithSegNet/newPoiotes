@@ -45,7 +45,7 @@ export function HeroSection() {
                 }}
               >
                 <p 
-                  className="font-cabinet leading-[normal] not-italic text-[#fdc60a] text-[13.172px] text-center text-nowrap transition-transform duration-300 ease-out"
+                  className="font-cabinet leading-[normal] not-italic text-[#fdc60a] text-[10px] md:text-[13.172px] text-center text-nowrap transition-transform duration-300 ease-out"
                   style={{
                     animation: isVisible ? 'bounce-subtle 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s' : 'none',
                   }}
@@ -53,7 +53,7 @@ export function HeroSection() {
                   🎉 2026
                 </p>
               </div>
-              <span className="relative z-10 font-mono tracking-wider font-semibold text-[12.172px] text-[#fdc60a]">
+              <span className="relative z-10 font-mono tracking-wider font-semibold text-[9px] sm:text-[10px] md:text-[12.172px] text-[#fdc60a]">
                 Software Development & Growth Engineering — Now Accepting Partners 🔥
               </span>
             </div>

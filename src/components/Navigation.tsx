@@ -189,7 +189,7 @@ export function Navigation() {
         className={`sticky top-0 z-[10010] backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${isScrolled ? 'bg-white/95 shadow-sm' : 'bg-transparent'
           }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-[20px] md:py-[30px] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-[20px] md:py-[30px] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${isMobileMenuOpen ? 'hidden md:block' : ''}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4 md:gap-8">
               {/* Logo */}
@@ -503,8 +503,9 @@ export function Navigation() {
           className={`absolute top-0 right-0 w-full sm:w-[340px] h-full bg-white shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
         >
-          {/* Close button */}
-          <div className="flex justify-end p-4">
+          {/* Header & Close button */}
+          <div className="flex justify-between items-center p-4">
+            <div className="w-20"><img src={Logo} alt="Poietes" /></div>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
@@ -565,7 +566,7 @@ export function Navigation() {
                           key={item.name}
                           to={item.link}
                           className="flex items-center gap-3 px-2 py-2.5 rounded-lg hover:bg-gray-50 transition-colors"
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={() => { setIsMobileMenuOpen(false); setIsDropdownOpen(false); }}
                         >
                           <span className="text-base">{item.icon}</span>
                           <div>
