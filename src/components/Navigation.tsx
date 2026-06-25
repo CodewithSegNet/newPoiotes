@@ -17,8 +17,10 @@ export function Navigation() {
   const [user, setUser] = useState<{ email: string; name: string; initials: string } | null>(null);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileDropdownRef = useRef<HTMLDivElement>(null);
   const loginPanelRef = useRef<HTMLDivElement>(null);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -38,6 +40,21 @@ export function Navigation() {
     setIsProfileDropdownOpen(false);
   }, [location.pathname]);
 
+  const handleMouseEnterDropdown = () => {
+    if (window.innerWidth >= 768) {
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+      setIsDropdownOpen(true);
+    }
+  };
+
+  const handleMouseLeaveDropdown = () => {
+    if (window.innerWidth >= 768) {
+      hoverTimeoutRef.current = setTimeout(() => {
+        setIsDropdownOpen(false);
+      }, 150);
+    }
+  };
+
   useEffect(() => {
     setIsVisible(true);
     const handleScroll = () => {
@@ -50,7 +67,10 @@ export function Navigation() {
   // Click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+        (!mobileDropdownRef.current || !mobileDropdownRef.current.contains(event.target as Node))
+      ) {
         setIsDropdownOpen(false);
       }
       if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target as Node)) {
@@ -221,7 +241,13 @@ export function Navigation() {
                 <div className={`hidden md:flex items-center gap-8 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
                   }`}>
                   {navLinks.map((link, index) => (
-                    <div key={link.label} className="relative" ref={link.hasDropdown ? dropdownRef : null}>
+                    <div 
+                      key={link.label} 
+                      className="relative" 
+                      ref={link.hasDropdown ? dropdownRef : null}
+                      onMouseEnter={link.hasDropdown ? handleMouseEnterDropdown : undefined}
+                      onMouseLeave={link.hasDropdown ? handleMouseLeaveDropdown : undefined}
+                    >
                       {link.hasDropdown ? (
                         <button
                           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -254,7 +280,7 @@ export function Navigation() {
                       ) : (
                         <Link
                           to={link.to}
-                          className="text-black font-normal text-sm font-cabinet relative group"
+                          className="text-black font-normal text-sm font-cabinet relative group flex items-center"
                           style={{
                             opacity: isVisible && !isMobileMenuOpen ? 1 : 0,
                             transform: isVisible && !isMobileMenuOpen ? 'translateY(0)' : 'translateY(-10px)',
@@ -520,6 +546,7 @@ export function Navigation() {
           <div className="flex flex-col px-6 pt-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 80px)' }}>
             {/* Products accordion */}
             <div
+              ref={mobileDropdownRef}
               className="border-b border-gray-100"
               style={{
                 opacity: isMobileMenuOpen ? 1 : 0,
