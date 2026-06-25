@@ -50,12 +50,12 @@ export function HeroSection() {
                     animation: isVisible ? 'bounce-subtle 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s' : 'none',
                   }}
                 >
-                  🎉 New
+                  🎉 2026
                 </p>
               </div>
-              <p className="font-cabinet leading-[normal] not-italic text-[#fdc60a] text-[12.172px] text-center text-nowrap transition-all duration-300 ease-out">
-                Poietes is here with the best experience 🔥
-              </p>
+              <span className="relative z-10 font-mono tracking-wider font-semibold text-[12.172px] text-[#fdc60a]">
+                Software Development & Growth Engineering — Now Accepting Partners 🔥
+              </span>
             </div>
             <div 
               className="size-[12.172px] transition-transform duration-500 ease-out group-hover:translate-x-2"
@@ -82,6 +82,9 @@ export function HeroSection() {
             transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s',
           }}
         >
+          <span className="text-[#818181] font-semibold text-sm block mb-2">
+            Software Development & Growth Engineering
+          </span>
           <span 
             className="text-[#ff6730] inline-block"
             style={{
@@ -90,17 +93,17 @@ export function HeroSection() {
               transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s',
             }}
           >
-            Building Softwares
+            Building Software
           </span>
           <span 
-            className="inline-block"
+            className="text-black font-normal opacity-90 block mt-2"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
               transition: 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s',
             }}
           >
-            {` for Businesses That Thinks Ahead of Your Competition `}
+            {` That Drives Measurable Business Growth`}
           </span>
         </h1>
 
@@ -113,7 +116,7 @@ export function HeroSection() {
             transition: 'all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s',
           }}
         >
-          Premium software solutions meticulously crafted for visionary businesses that demand excellence in every pixel, every interaction, every outcome.
+          We help businesses acquire customers, improve conversions, and scale operations through strategy, design, engineering, and data.
         </p>
 
         {/* Buttons - Slide in from sides */}
@@ -128,7 +131,7 @@ export function HeroSection() {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#fdd040] to-[#fdc60a] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <p className="relative z-10 font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-[10.701px] text-nowrap text-white transition-transform duration-300 ease-out group-hover:scale-105">
-              See all Services
+              Discuss Your Project
             </p>
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className="absolute inset-0 shadow-lg shadow-[#fdc60a]/30 rounded-[76.435px]" />
@@ -143,9 +146,9 @@ export function HeroSection() {
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#ff7845] to-[#ff6730] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-            <p className="relative z-10 font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-[10.701px] text-nowrap text-white transition-transform duration-300 ease-out group-hover:scale-105">
-              Make Enquiries
-            </p>
+            <span className="relative z-10 flex items-center gap-2 group-hover:-translate-x-1 transition-transform font-['Cabinet_Grotesk:Regular',sans-serif] text-[10.701px] text-nowrap text-white">
+              View Our Framework
+            </span>
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className="absolute inset-0 shadow-lg shadow-[#ff6730]/30 rounded-[76.435px]" />
             </div>

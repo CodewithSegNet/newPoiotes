@@ -3,7 +3,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 const services = [
   {
     title: 'Web Application Development',
-    description: 'Custom web applications built with cutting-edge technologies like React, Next.js, and modern backend frameworks.',
+    description: 'Web applications built with cutting-edge technologies like React, Next.js, and modern backend frameworks.',
     image: 'https://images.unsplash.com/photo-1573757056004-065ad36e2cf4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwaW5ub3ZhdGlvbiUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzY2OTMyNzMwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
     color: '#ff6730'
   },

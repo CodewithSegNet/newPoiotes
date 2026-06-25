@@ -14,10 +14,10 @@ export function Footer() {
           <div className="flex flex-col gap-5">
             <img src={Logo} alt="Poietes" className="w-40" />
             <p className="text-white/60 text-xs leading-relaxed max-w-[260px]">
-              Poietes is a premium software development company delivering
-              custom web applications, mobile apps, cloud solutions, and
-              AI-powered systems for ambitious businesses worldwide. We build
-              software that scales with your vision.
+              Poietes is a software development and growth engineering company.
+              We build our own products and help businesses grow through
+              web applications, mobile apps, data-driven strategy, conversion
+              optimization, and digital experiences that drive measurable results.
             </p>
           </div>
 
@@ -30,11 +30,11 @@ export function Footer() {
               </h4>
               <ul className="flex flex-col gap-3">
                 {[
-                  'Brand Design',
-                  'Software Development',
-                  'Product Design',
-                  'Graphics Design',
-                  'Marketing Management',
+                  'Digital Marketing & SEO',
+                  'Product Engineering',
+                  'Conversion Design',
+                  'Analytics & Intelligence',
+                  'SEO & Customer Acquisition',
                 ].map((item) => (
                   <li key={item}>
                     <a
@@ -55,7 +55,7 @@ export function Footer() {
               </h4>
               <ul className="flex flex-col gap-3">
                 {[
-                  'About Inspekta',
+                  'About Poietes',
                   'Careers',
                   'Contact Us',
                   'Blogs & News',
@@ -80,11 +80,11 @@ export function Footer() {
               </h4>
               <ul className="flex flex-col gap-3">
                 {[
-                  'Web Development',
-                  'Design',
-                  'Branding',
-                  'Marketing',
-                  'Digital Marketing',
+                  'Web Applications',
+                  'Mobile Apps',
+                  'APIs & Integrations',
+                  'Automation Systems',
+                  'Cloud Infrastructure',
                 ].map((item) => (
                   <li key={item}>
                     <a
@@ -105,11 +105,11 @@ export function Footer() {
               </h4>
               <ul className="flex flex-col gap-3">
                 {[
-                  'Web Development',
-                  'Design',
-                  'Branding',
-                  'Marketing',
-                  'Digital Marketing',
+                  'Case Studies',
+                  'Development Framework',
+                  'Blog',
+                  'Documentation',
+                  'API Reference',
                 ].map((item) => (
                   <li key={item}>
                     <a
@@ -295,7 +295,7 @@ export function Footer() {
 
             {/* Copyright */}
             <div className="text-white/40 text-xs text-left md:text-right">
-              © 2025 xpertsstios. All rights reserved.
+              © 2026 Poietes. All rights reserved.
             </div>
           </div>
 
@@ -321,15 +321,10 @@ export function Footer() {
         {/* ─── Bottom Description ─── */}
         <div className="mt-8 border-t border-white/10 pt-6">
           <p className="text-white/30 text-[10px] leading-relaxed">
-            Poietes is a registered software development company providing
-            end-to-end digital product engineering services including custom
-            software development, web application development, mobile app
-            development (iOS & Android), cloud computing and DevOps, UI/UX
-            product design, artificial intelligence and machine learning
-            integration, e-commerce solutions, SaaS platform development,
-            API development and third-party integrations, and technology
-            consulting. We serve clients across fintech, healthcare,
-            real estate, logistics, and enterprise sectors globally.
+            Poietes is a global software development company and technology partner.
+            We provide full-cycle digital product engineering and growth services
+            including web application development, mobile app development (iOS & Android),
+            DevOps consulting, technical SEO optimization, and audience acquisition.
             All services are delivered with industry-standard security
             compliance, comprehensive documentation, and ongoing
             maintenance support.

@@ -34,16 +34,16 @@ export default function AboutPage() {
             className="font-cabinet font-bold text-3xl sm:text-4xl md:text-5xl lg:text-[56px] text-white leading-tight mb-6"
             style={animStyle(0.1)}
           >
-            We Build Software That{' '}
-            <span className="text-[#FF6730]">Thinks Ahead</span>
+            We Engineer <span className="text-[#FF6730]">Growth</span> Through Software
           </h1>
 
           <p
             className="text-white/60 text-sm sm:text-base max-w-2xl mx-auto font-satoshi leading-relaxed"
             style={animStyle(0.2)}
           >
-            Poietes is a premium software development company that crafts intelligent,
-            luxury-grade solutions for visionary businesses that demand excellence.
+            Poietes is a software development and growth engineering company that builds
+            its own products and helps ambitious businesses grow through technology,
+            data-driven strategy, and conversion-focused digital experiences.
           </p>
         </div>
       </section>
@@ -56,10 +56,10 @@ export default function AboutPage() {
               Our Mission
             </h2>
             <p className="text-[#818181] text-sm leading-relaxed font-satoshi">
-              To empower ambitious businesses with software solutions that don't just meet
-              expectations — they redefine them. We combine strategic thinking, luxury-grade
-              execution, and cutting-edge technology to create products that become your
-              competitive advantage.
+              To help businesses achieve measurable growth through technology, data, and
+              digital experiences. We build software products and help companies develop
+              solutions that acquire customers, optimize conversions, retain users, and
+              drive revenue — not just write code.
             </p>
           </div>
           <div style={animStyle(0.4)}>
@@ -67,9 +67,9 @@ export default function AboutPage() {
               Our Vision
             </h2>
             <p className="text-[#818181] text-sm leading-relaxed font-satoshi">
-              To be the world's most trusted partner for businesses seeking software that
-              drives real impact. We envision a future where every ambitious brand has access
-              to technology that works as hard as they do.
+              To become a trusted growth and technology partner for ambitious businesses
+              globally. Businesses should choose Poietes because we understand growth
+              AND build great software — not just one or the other.
             </p>
           </div>
         </div>
@@ -91,8 +91,8 @@ export default function AboutPage() {
             {[
               {
                 icon: '🎯',
-                title: 'Strategic Excellence',
-                description: 'Every feature serves a strategic purpose — driving revenue, reducing costs, or creating competitive advantages.',
+                title: 'Growth-First Engineering',
+                description: 'Every product and feature serves a strategic purpose — acquiring customers, improving conversions, or scaling operations.',
               },
               {
                 icon: '💎',
@@ -111,8 +111,8 @@ export default function AboutPage() {
               },
               {
                 icon: '📊',
-                title: 'Data-Driven',
-                description: 'User analytics, A/B testing, and performance metrics guide every decision. No guesswork.',
+                title: 'Data-Driven Decisions',
+                description: 'Analytics, funnel tracking, user behavior analysis, and performance metrics guide every decision we make.',
               },
               {
                 icon: '🌍',
@@ -138,11 +138,11 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl mx-auto text-center" style={animStyle(0.2)}>
           <h2 className="font-cabinet font-bold text-2xl sm:text-3xl lg:text-[40px] text-[#1a1a1a] mb-4 leading-tight">
-            Ready to Build Something{' '}
-            <span className="text-[#FF6730]">Extraordinary</span>?
+            Ready to Grow Your Business{' '}
+            <span className="text-[#FF6730]">With Software</span>?
           </h2>
           <p className="text-[#818181] text-sm sm:text-base mb-8 font-satoshi">
-            Let's start a conversation about how we can transform your ambitious vision into reality.
+            Let’s start a conversation about building products that drive measurable growth for your business.
           </p>
           <a
             href="#"
@@ -150,7 +150,7 @@ export default function AboutPage() {
                        hover:bg-[#e55a28] transition-all duration-300 hover:shadow-lg hover:shadow-[#FF6730]/25
                        hover:-translate-y-0.5 active:translate-y-0"
           >
-            Make Enquiries
+            Book a Growth Call
           </a>
         </div>
       </section>

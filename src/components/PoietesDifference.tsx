@@ -71,14 +71,13 @@ export function PoietesDifference() {
             className="font-cabinet font-bold text-3xl md:text-4xl lg:text-[42px] text-[#1a1a1a] mb-3"
             style={animStyle(0)}
           >
-            The Poietes Difference
+            About Poietes
           </h2>
           <p
-            className="text-[#818181] text-sm md:text-base max-w-lg mx-auto font-satoshi"
+            className="text-[#818181] text-sm md:text-base max-w-2xl mx-auto font-satoshi"
             style={animStyle(0.15)}
           >
-            We're architects of intelligent, luxury-grade software that transforms
-            ambitious brands into industry leaders.
+            Most agencies build software. We build growth systems. Every project we undertake is tied to measurable business outcomes: customer acquisition, conversion optimization, and operational efficiency.
           </p>
         </div>
 

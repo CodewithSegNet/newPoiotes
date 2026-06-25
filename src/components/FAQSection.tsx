@@ -2,29 +2,34 @@ import { useState, useEffect, useRef } from 'react';
 
 const faqs = [
   {
-    question: 'Who is Poietes',
+    question: 'Who is Poietes?',
     answer:
-      'Poietes is a full-service software development agency specializing in custom web development, mobile app development, cloud infrastructure, and AI-powered solutions. We partner with startups and enterprises to build scalable, high-performance digital products that drive business growth and deliver exceptional user experiences.',
+      'Poietes is a full-cycle software development and technology partner. We build our own successful digital products (like Kloka) and help ambitious businesses succeed through web application development, iOS and Android mobile apps, DevOps consulting, technical SEO, and conversion-focused digital marketing. We don\'t just write code — we build systems that generate business value.',
   },
   {
-    question: 'What does Poietes do',
+    question: 'What makes Poietes different from typical software agencies?',
     answer:
-      'Poietes is a premium software development company that builds intelligent, luxury-grade software solutions for ambitious businesses. We specialize in custom software development, AI systems, and product design.',
+      'Most software agencies just write code. Poietes delivers end-to-end digital product engineering tied directly to business growth. Every project is designed around measurable business outcomes — whether that\'s launching a scalable mobile app, optimizing your infrastructure, or driving user acquisition for your new platform. We combine robust software engineering with proven digital growth strategies.',
   },
   {
-    question: 'How can I work with Poietes',
+    question: 'What services does Poietes offer?',
     answer:
-      'You can reach out to us through our contact form, email, or phone. We start with a discovery call to understand your needs, then propose a tailored solution.',
+      'We offer software development (web apps, mobile apps, APIs), digital marketing & user acquisition (technical SEO, competitor analysis, audience targeting), product design (UX/UI, conversion rate optimization), infrastructure & reliability (DevOps consulting, cloud architecture, security), and data intelligence (funnel tracking, business intelligence).',
+  },
+  {
+    question: 'How can I work with Poietes?',
+    answer:
+      'Start with a free technical consultation — we\'ll understand your business goals, analyze your current software architecture or digital presence, and propose a tailored roadmap for development and user acquisition. Every engagement begins with deep technical research and ends with a robust, scalable product.',
   },
   {
     question: 'What is Poietes pricing?',
     answer:
-      'Our pricing is project-based and depends on the scope, complexity, and timeline. We provide detailed proposals after understanding your requirements during the discovery phase.',
+      'Our pricing is project-based and depends on scope, complexity, and timeline. We provide detailed proposals with clear ROI projections after understanding your requirements during the discovery phase.',
   },
   {
-    question: 'What kind of support do you offer?',
+    question: 'Do you build your own products?',
     answer:
-      'We offer comprehensive post-launch support including bug fixes, performance monitoring, feature updates, and ongoing maintenance. We treat every client as a long-term partner.',
+      'Yes! We build and operate our own software products like Kloka (attendance monitoring). This means we understand both sides — the technical challenges of building products and the business challenges of growing them. We bring that experience to every client engagement.',
   },
 ];
 

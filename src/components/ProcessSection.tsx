@@ -2,24 +2,24 @@ import { useState, useEffect, useRef } from 'react';
 
 const processSteps = [
   {
-    title: 'Discovery & Strategy',
-    description: 'Deep dive into your business. Market research. User insights. Technical requirements.',
+    title: 'Research',
+    description: 'We analyze your business goals, competitors, and target audience to define a clear, data-driven strategy.',
   },
   {
-    title: 'Design & Architecture',
-    description: 'Wireframes & prototypes. Visual design. System architecture. User testing.',
+    title: 'Design',
+    description: 'We craft intuitive, high-conversion user experiences and system architectures designed for scale.',
   },
   {
-    title: 'Development & Integration',
-    description: 'Agile development sprints. Regular check-ins. Quality assurance.',
+    title: 'Build',
+    description: 'We engineer robust, secure, and high-performance digital products using modern technology stacks.',
   },
   {
-    title: 'Launch & Optimization',
-    description: 'Deployment. Team training. Documentation. Post-launch support.',
+    title: 'Measure',
+    description: 'We implement analytics and tracking to gather real user data and monitor system performance.',
   },
   {
-    title: 'Growth & Evolution',
-    description: 'Performance monitoring. Continuous improvement. Feature evolution.',
+    title: 'Optimize',
+    description: 'We continuously refine features, improve conversion rates, and scale infrastructure based on real-world usage.',
   },
 ];
 
@@ -50,7 +50,7 @@ export function ProcessSection() {
             transition: 'all 0.8s ease-out',
           }}
         >
-          Our Process
+          The Poietes Growth Framework
         </h2>
 
         {/* Process Grid */}

@@ -91,65 +91,65 @@ export function TechCompanySection() {
   const services = [
     {
       icon: (
-     <img className='h-5 w-5' src={star} alt="" />
-      ),
-      tag: 'We Build',
-      title: 'Custom Software Development',
-      description: 'From enterprise web applications to cross-platform mobile apps, we architect and engineer custom software solutions tailored to your business goals. Our full-stack development team delivers clean, scalable code with modern frameworks and cloud-native technologies.',
-      image: cardone,
-      imagePosition: 'bottom' as const,
-      gradient: 'radial-gradient(ellipse at bottom left, rgba(253, 198, 10, 0.4) 0%, transparent 50%)',
-    },
-    {
-      icon: (
-     <img className='h-5 w-5' src={bell} alt="" />
-      ),
-      tag: null,
-      title: 'AI & Intelligent Systems',
-      description: 'Strategically come up with user friendly and responsive AI-powered solutions that learn and adapt to your business needs.',
-      image: cardtwo,
-      imagePosition: 'top' as const,
-      gradient: 'radial-gradient(ellipse at bottom left, rgba(231, 48, 2, 0.3) 0%, transparent 50%)',
-    },
-    {
-      icon: (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="10" fill="#22C55E" />
           <path d="M8 12L11 15L16 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      tag: null,
-      title: 'Product Design & UX',
-      description: 'Know the details with real-time updates from lean documentation. We craft pixel-perfect interfaces that delight users.',
-      image: cardthree,
+      tag: 'Core Engineering',
+      title: 'Build Better Digital Products',
+      description: 'Web Applications, Mobile Applications, SaaS Platforms, APIs, and System Integrations designed to deliver exceptional user experiences.',
+      image: cardone,
       imagePosition: 'bottom' as const,
       gradient: 'radial-gradient(ellipse at bottom left, rgba(1, 220, 132, 0.4) 0%, transparent 50%)',
     },
     {
       icon: (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#FF6730"/>
-        </svg>
+     <img className='h-5 w-5' src={star} alt="" />
       ),
-      tag: 'We Scale',
-      title: 'Cloud & Infrastructure',
-      description: 'Enterprise-grade cloud architecture built for scale. Secure, resilient, and optimized for peak performance at any load.',
-      image: cardone,
-      imagePosition: 'bottom' as const,
-      gradient: 'radial-gradient(ellipse at bottom left, rgba(147, 51, 234, 0.4) 0%, transparent 50%)',
+      tag: 'Efficiency',
+      title: 'Improve Business Operations',
+      description: 'Automation Systems, Internal Platforms, Workflow Optimization, and Business Process Digitization that streamline your workflows.',
+      image: cardtwo,
+      imagePosition: 'top' as const,
+      gradient: 'radial-gradient(ellipse at bottom left, rgba(253, 198, 10, 0.4) 0%, transparent 50%)',
     },
     {
       icon: (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#FDC60A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
-      tag: 'We Advise',
-      title: 'Consulting & Strategy',
-      description: 'From roadmap to launch, we provide strategic technology consulting that aligns your software investments with business goals.',
+      tag: 'Intelligence',
+      title: 'Understand Your Customers',
+      description: 'Analytics, User Behavior Tracking, Conversion Analysis, and Business Intelligence turning raw data into strategic insights.',
+      image: cardthree,
+      imagePosition: 'bottom' as const,
+      gradient: 'radial-gradient(ellipse at bottom left, rgba(6, 182, 212, 0.4) 0%, transparent 50%)',
+    },
+    {
+      icon: (
+     <img className='h-5 w-5' src={bell} alt="" />
+      ),
+      tag: 'Growth',
+      title: 'Increase Digital Visibility',
+      description: 'SEO Research, Competitor Analysis, Technical SEO, Content Strategy, and Search Performance Optimization to capture high-intent traffic.',
+      image: cardone,
+      imagePosition: 'bottom' as const,
+      gradient: 'radial-gradient(ellipse at bottom left, rgba(231, 48, 2, 0.3) 0%, transparent 50%)',
+    },
+    {
+      icon: (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#9333EA"/>
+        </svg>
+      ),
+      tag: 'Reliability',
+      title: 'Secure & Scale',
+      description: 'Infrastructure Management, Performance Optimization, Monitoring, Backups, and Security Best Practices ensuring uptime and resilience.',
       image: cardtwo,
       imagePosition: 'top' as const,
-      gradient: 'radial-gradient(ellipse at bottom left, rgba(6, 182, 212, 0.4) 0%, transparent 50%)',
+      gradient: 'radial-gradient(ellipse at bottom left, rgba(147, 51, 234, 0.4) 0%, transparent 50%)',
     },
   ];
 
@@ -261,8 +261,8 @@ export function TechCompanySection() {
               transition: 'all 0.8s ease-out 0.2s',
             }}
           >
-            We're not just another{' '}
-            <span className="text-[#FF6730]">tech Company.</span>
+            We build software that{' '}
+            <span className="text-[#FF6730]">grows businesses.</span>
           </h2>
           <p
             className="text-white/60 text-sm md:text-base max-w-lg mx-auto font-cabinet"
@@ -272,8 +272,8 @@ export function TechCompanySection() {
               transition: 'all 0.8s ease-out 0.4s',
             }}
           >
-            We're architects of intelligent, luxury-grade software that transforms
-            ambitious brands into industry leaders.
+            We're expert software developers and digital marketers — we create our own software
+            products and help ambitious businesses build theirs, with every feature tied to measurable business outcomes.
           </p>
         </div>
 
