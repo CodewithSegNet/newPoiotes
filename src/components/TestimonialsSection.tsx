@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import background from "../assets/Testimonials.png"
+import background from "../assets/Testimonials.avif"
 
 export function TestimonialsSection() {
   const [isVisible, setIsVisible] = useState(false);

@@ -97,11 +97,10 @@ export function FAQSection() {
                     {faq.question}
                   </span>
                   <div
-                    className={`w-7 h-7 rounded-full border flex items-center justify-center shrink-0 ml-4 transition-all duration-300 ${
-                      openIndex === index
+                    className={`w-7 h-7 rounded-full border flex items-center justify-center shrink-0 ml-4 transition-all duration-300 ${openIndex === index
                         ? 'border-[#FF6730] bg-[#FF6730]/5 rotate-45'
                         : 'border-gray-300'
-                    }`}
+                      }`}
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={openIndex === index ? '#FF6730' : '#818181'} strokeWidth="2">
                       <path d="M12 5v14M5 12h14" />
@@ -117,7 +116,7 @@ export function FAQSection() {
                     opacity: openIndex === index ? 1 : 0,
                   }}
                 >
-                  <p className="text-[#818181] text-xs leading-relaxed pb-5">
+                  <p className="text-[#818181] text-sm leading-relaxed pb-5">
                     {faq.answer}
                   </p>
                 </div>

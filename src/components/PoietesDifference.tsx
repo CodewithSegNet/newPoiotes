@@ -30,7 +30,7 @@ export function PoietesDifference() {
         if (entry.isIntersecting) {
           setIsVideoInView(true);
           if (videoRef.current) {
-            videoRef.current.play().catch(() => {});
+            videoRef.current.play().catch(() => { });
           }
         } else {
           setIsVideoInView(false);
@@ -62,6 +62,13 @@ export function PoietesDifference() {
     transition: `all 0.8s ease-out ${delay}s`,
   });
 
+  // Shared button classes: bumped up padding/text size to standard web scale,
+  // plus a smooth hover lift + active press animation.
+  const ctaClasses =
+    "inline-block w-fit px-6 py-2.5 rounded-full bg-[#FF6730] text-white text-sm font-cabinet font-semibold " +
+    "transition-all duration-300 ease-out hover:bg-[#e55a28] hover:scale-105 hover:shadow-lg hover:shadow-[#FF6730]/30 " +
+    "active:scale-95 active:duration-150";
+
   return (
     <section ref={sectionRef} className="bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-0">
       <div className="max-w-7xl mx-auto ">
@@ -74,7 +81,7 @@ export function PoietesDifference() {
             About Poietes
           </h2>
           <p
-            className="text-[#818181] text-sm md:text-base max-w-2xl mx-auto font-satoshi"
+            className="text-[#818181] text-sm md:text-lg max-w-2xl mx-auto font-satoshi"
             style={animStyle(0.15)}
           >
             Most agencies build software. We build growth systems. Every project we undertake is tied to measurable business outcomes: customer acquisition, conversion optimization, and operational efficiency.
@@ -91,18 +98,15 @@ export function PoietesDifference() {
             <h3 className="font-satoshi font-black text-2xl md:text-3xl lg:text-[36px] text-[#1a1a1a] mb-2 leading-tight">
               Strategic Thinking First
             </h3>
-            <p className="font-satoshi font-medium text-sm text-[#1a1a1a] mb-3">
+            <p className="font-satoshi font-medium text-base text-[#1a1a1a] mb-3">
               We don't just code. We solve business problems.
             </p>
-            <p className="text-[#818181] text-xs leading-relaxed mb-5 font-satoshi">
+            <p className="text-[#818181] text-sm leading-relaxed mb-5 font-satoshi">
               Before writing code, we dive deeper into your business—understanding customers, analyzing competitors, and
               identifying opportunities. Every feature serves a strategic purpose: driving revenue, reducing costs, or creating
               competitive advantages.
             </p>
-            <a
-              href="#"
-              className="inline-block w-fit px-5 py-2 rounded-full bg-[#FF6730] text-white text-xs font-cabinet font-semibold hover:bg-[#e55a28] transition-all duration-300"
-            >
+            <a href="#" className={ctaClasses}>
               Make Enquiries
             </a>
           </div>
@@ -134,28 +138,24 @@ export function PoietesDifference() {
             <h3 className="font-satoshi font-black text-2xl md:text-3xl lg:text-[36px] text-[#1a1a1a] mb-2 leading-tight">
               Luxury Execution
             </h3>
-            <p className="font-satoshi font-medium text-sm text-[#1a1a1a] mb-3">
+            <p className="font-satoshi font-medium text-base text-[#1a1a1a] mb-3">
               Every pixel, every interaction, every detail matters.
             </p>
-            <p className="text-[#818181] text-xs leading-relaxed mb-5 font-satoshi">
+            <p className="text-[#818181] text-sm leading-relaxed mb-5 font-satoshi">
               We obsess over invisible details, micro interactions, and loading states most agencies
               ignore. Pixel-first top-to-find craftmanship on every element, ensuring. Our work doesn't just
               function—it captivates and becomes your brand's signature.
             </p>
-            <a
-              href="#"
-              className="inline-block px-5 py-2 rounded-full bg-[#FF6730] text-white text-xs font-cabinet font-semibold hover:bg-[#e55a28] transition-all duration-300"
-            >
+            <a href="#" className={ctaClasses}>
               Make Enquiries
             </a>
           </div>
           {/* Video cell - right (partial on desktop, fills container on mobile) */}
-          <div ref={videoContainerRef} className="relative border-t md:border-t-0 w-full sm:w-[250px] md:w-[320px] h-[280px] sm:h-[320px] md:h-[380px] border-l-0 md:border-l border-[#E5E5E5] overflow-hidden">
+          <div ref={videoContainerRef} className="relative rounded-xl w-full sm:w-[250px] md:w-[320px] h-[280px] sm:h-[320px] md:h-[380px] m-2 overflow-hidden">
             {/* Loading skeleton */}
-            <div className={`absolute inset-0 z-[5] flex items-center justify-center bg-gray-100 transition-opacity duration-500 ${
-              isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
-            }`}>
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse" />
+            <div className={`absolute inset-0 z-[5] rounded-xl flex items-center justify-center bg-gray-100 transition-opacity duration-500 ${isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 animate-pulse" />
               <div className="relative flex flex-col items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center shadow-sm">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -181,17 +181,16 @@ export function PoietesDifference() {
               }}
               onCanPlay={() => {
                 if (videoRef.current) {
-                  videoRef.current.play().catch(() => {});
+                  videoRef.current.play().catch(() => { });
                 }
               }}
-              className="w-full h-full object-cover my-2 ml-2 md:absolute md:inset-0"
+              className="absolute inset-0 w-full h-full object-cover rounded-xl"
             />
             {/* Mute/Unmute toggle */}
             <button
               onClick={toggleMute}
-              className={`absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all duration-200 z-10 ${
-                isVideoLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute bottom-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-all duration-200 z-10 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
               aria-label={isMuted ? 'Unmute' : 'Mute'}
             >
               {isMuted ? (
@@ -221,18 +220,15 @@ export function PoietesDifference() {
             <h3 className="font-cabinet font-bold text-2xl md:text-3xl text-[#1a1a1a] mb-2 leading-tight">
               True Ownership
             </h3>
-            <p className="font-satoshi font-medium text-sm text-[#1a1a1a] mb-3">
+            <p className="font-satoshi font-medium text-base text-[#1a1a1a] mb-3">
               No lock-in. No dependencies. Complete transparency.
             </p>
-            <p className="text-[#818181] text-xs leading-relaxed mb-5 font-satoshi">
+            <p className="text-[#818181] text-sm leading-relaxed mb-5 font-satoshi">
               You own every line of code and design file. We use industry-standard tech, provide
               full documentation, and train your team. You're free to leave anytime—but when we
               offer flexibility, clients choose to stay.
             </p>
-            <a
-              href="#"
-              className="inline-block px-5 py-2 rounded-full bg-[#FF6730] text-white text-xs font-cabinet font-semibold hover:bg-[#e55a28] transition-all duration-300"
-            >
+            <a href="#" className={ctaClasses}>
               Make Enquiries
             </a>
           </div>
@@ -242,18 +238,15 @@ export function PoietesDifference() {
             <h3 className="font-cabinet font-bold text-2xl md:text-3xl text-[#1a1a1a] mb-2 leading-tight">
               Intelligence-Driven
             </h3>
-            <p className="font-satoshi font-medium text-sm text-[#1a1a1a] mb-3">
+            <p className="font-satoshi font-medium text-base text-[#1a1a1a] mb-3">
               Data informs every decision we make.
             </p>
-            <p className="text-[#818181] text-xs leading-relaxed mb-5 font-satoshi">
+            <p className="text-[#818181] text-sm leading-relaxed mb-5 font-satoshi">
               User analytics, A/B testing, and performance metrics guide every hand-on-not approach. This
               eliminates guesswork, reduces risk, and ensures each iteration makes your product measurably
               better than before.
             </p>
-            <a
-              href="#"
-              className="inline-block px-5 py-2 rounded-full bg-[#FF6730] text-white text-xs font-cabinet font-semibold hover:bg-[#e55a28] transition-all duration-300"
-            >
+            <a href="#" className={ctaClasses}>
               Make Enquiries
             </a>
           </div>
@@ -277,18 +270,15 @@ export function PoietesDifference() {
             <h3 className="font-cabinet font-bold text-2xl md:text-3xl lg:text-[36px] text-[#1a1a1a] mb-2 leading-tight">
               Long-term Partnership
             </h3>
-            <p className="font-satoshi font-medium text-sm text-[#1a1a1a] mb-3">
+            <p className="font-satoshi font-medium text-base text-[#1a1a1a] mb-3">
               Your success is our success metric.
             </p>
-            <p className="text-[#818181] text-xs leading-relaxed mb-5 font-satoshi">
+            <p className="text-[#818181] text-sm leading-relaxed mb-5 font-satoshi">
               We don't disappear after launch. As your business grows, we grow with you—adding features, optimizing
               performance, scaling infrastructure. Think of us as your embedded product team, invested in your long-term
               continued up.
             </p>
-            <a
-              href="#"
-              className="inline-block px-5 py-2 rounded-full bg-[#FF6730] text-white text-xs font-cabinet font-semibold hover:bg-[#e55a28] transition-all duration-300"
-            >
+            <a href="#" className={ctaClasses}>
               Make Enquiries
             </a>
           </div>
@@ -306,17 +296,14 @@ export function PoietesDifference() {
               <br />
               Personal Touch
             </h3>
-            <p className="font-satoshi font-medium text-sm text-[#1a1a1a] mb-3">
+            <p className="font-satoshi font-medium text-base text-[#1a1a1a] mb-3">
               Enterprise-grade quality for every project.
             </p>
-            <p className="text-[#818181] text-xs leading-relaxed mb-5 font-satoshi">
+            <p className="text-[#818181] text-sm leading-relaxed mb-5 font-satoshi">
               Military-grade security, WCAG, gdpr-e, accessibility, compliance—whether you're a startup or Fortune 500. But unlike
               enterprise approaches, you know us by name and still building a fresh team for every project.
             </p>
-            <a
-              href="#"
-              className="inline-block px-5 py-2 rounded-full bg-[#FF6730] text-white text-xs font-cabinet font-semibold hover:bg-[#e55a28] transition-all duration-300"
-            >
+            <a href="#" className={ctaClasses}>
               Make Enquiries
             </a>
           </div>

@@ -1,10 +1,10 @@
 import Arrow from '../assets/arrow.png';
 import DottedLine from '../assets/dottedline.png';
-import Mascot from '../assets/mascot.png';
+import Mascot from '../assets/mascot.avif';
 
 export function CTAFooter() {
   return (
-    <section className="flex items-center justify-between relative w-full h-[60vh] sm:h-[70vh] lg:h-[90vh] overflow-hidden">
+    <section className="flex items-center justify-between relative w-full h-[450px] md:h-[600px] lg:h-[600px] xl:h-[650px] overflow-hidden max-w-screen-3xl mx-auto">
       {/* Dotted line decoration — positioned as an arc from top-left toward right */}
 
       <div className="flex items-center justify-between w-full max-w-[1100px] mx-auto px-4 sm:px-6">
@@ -13,7 +13,7 @@ export function CTAFooter() {
           src={DottedLine}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute top-[22px] md:top-0 left-0 w-[100%] md:w-[100%] z-[1] select-none opacity-80"
+          className="pointer-events-none absolute top-[22px] md:top-[3rem] lg:top-[3rem] lg:top-[0.7rem] left-0 w-[100%] md:w-[100%] z-[1] select-none opacity-80"
         />
 
         {/* Arrow decoration — top-left */}
@@ -21,7 +21,7 @@ export function CTAFooter() {
           src={Arrow}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute top-0 left-[8%] md:top-[2.5rem] md:left-[20%] w-24 md:w-36 lg:w-44 z-[2] select-none"
+          className="pointer-events-none absolute top-0 left-[8%] md:top-[2.5rem] md:left-[20%] lg:top-[.5rem] xl:top-[1.9rem] xl:left-[18%] w-24 md:w-36 lg:w-44 z-[2] select-none"
         />
 
         {/* Content wrapper — uses flex to vertically center the text */}
@@ -55,11 +55,11 @@ export function CTAFooter() {
 
 
         {/* Right — Mascot, pinned to bottom-right, independent of text flow */}
-        <div className="absolute bottom-[-90px] sm:bottom-[-220px] md:bottom-[-250px] lg:bottom-[-280px] right-0 z-[2]">
+        <div className="absolute bottom-[-90px] sm:bottom-[-220px] md:bottom-[-180px] lg:bottom-[-240px] xl:bottom-[-330px] xxl:bottom-[-400px] xxl:right-[550px] right-0 z-[2]">
           <img
             src={Mascot}
             alt="Poietes Mascot"
-            className="w-[160px] sm:w-[340px] md:w-[400px] lg:w-[660px] max-w-full object-contain drop-shadow-2xl"
+            className="w-[160px] sm:w-[340px] md:w-[300px] lg:w-[400px] xl:w-[550px] xxl:w-[660px] max-w-full object-contain drop-shadow-2xl"
           />
         </div>
 

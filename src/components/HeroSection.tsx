@@ -16,26 +16,26 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section 
+    <section
       ref={heroRef}
-      className="relative md:min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20 bg-gradient-to-br from-white via-[#fff8f0] to-white overflow-hidden"
+      className="relative isolate md:min-h-[40vh] lg:min-h-[40vh] xl:min-h-[40vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16 lg:pb-20 bg-gradient-to-br from-white via-[#fff8f0] to-white overflow-hidden"
     >
-      {/* Pixel Grid - only in hero section, lower z-index */}
-      <div className="absolute inset-0 z-[9997]">
+      {/* Pixel Grid - only in hero section, lower z-index, doesn't intercept clicks */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <PixelTracker />
       </div>
-      
-      {/* Content - higher z-index */}
-      <div className="relative z-[10000] py-6 mt-8 sm:mt-10 lg:mt-14 w-full max-w-4xl flex flex-col gap-3 sm:gap-[19.109px] items-center">
-        <div 
-          className="bg-[rgba(253,198,10,0.02)] border border-[#fdc60a]/10 relative overflow-hidden px-3 py-[6px] rounded-full group cursor-pointer w-[280px] sm:w-[400px] md:w-[500px]"
+
+      {/* Content - higher z-index, isolated stacking context guarantees it's on top */}
+      <div className="relative z-10 py-6 mt-8 sm:mt-10 lg:mt-14 w-full max-w-4xl flex flex-col gap-3 sm:gap-[19.109px] items-center">
+        <div
+          className="bg-[rgba(253,198,10,0.02)] border border-[#fdc60a]/10 relative overflow-hidden px-3 py-[6px] rounded-full group cursor-pointer w-[280px] sm:w-[400px] md:w-[500px] pointer-events-auto"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(-20px) scale(0.95)',
             transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s',
           }}
         >
-          <div 
+          <div
             className="flex w-max"
             style={{
               animation: isVisible ? 'marquee-rtl 30s linear infinite' : 'none',
@@ -50,7 +50,7 @@ export function HeroSection() {
                       2026
                     </span>
                   </div>
-                  
+
                   <span className="relative z-10 font-mono tracking-wider font-semibold text-[9px] sm:text-[10px] md:text-[12.172px] text-[#fdc60a] whitespace-nowrap">
                     Building Scalable Digital Products <span className="mx-2 text-[#fdc60a]/40">—</span> Now Accepting Partners
                   </span>
@@ -68,7 +68,7 @@ export function HeroSection() {
         </div>
 
         {/* Heading - Fade in with scale and blur */}
-        <h1 
+        <h1
           className="font-cabinet leading-tight sm:leading-[42px] lg:leading-[56.505px] not-italic text-[#282323] text-[28px] sm:text-[40px] lg:text-[55.918px] text-center"
           style={{
             opacity: isVisible ? 1 : 0,
@@ -80,7 +80,7 @@ export function HeroSection() {
           <span className="text-[#818181] font-semibold text-sm block mb-2">
             Software Development & Growth Engineering
           </span>
-          <span 
+          <span
             className="text-[#ff6730] inline-block"
             style={{
               opacity: isVisible ? 1 : 0,
@@ -90,7 +90,7 @@ export function HeroSection() {
           >
             Building Software
           </span>
-          <span 
+          <span
             className="text-black font-normal opacity-90 block mt-2"
             style={{
               opacity: isVisible ? 1 : 0,
@@ -103,8 +103,8 @@ export function HeroSection() {
         </h1>
 
         {/* Description - Fade in from bottom */}
-        <p 
-          className="font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-[#818181] text-[11px] sm:text-[12.23px] max-w-full sm:max-w-[477.447px] text-center px-2 sm:px-0"
+        <p
+          className="font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-[#818181] text-sm md:text-base max-w-full sm:max-w-[477.447px] text-center px-2 sm:px-0"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -114,10 +114,10 @@ export function HeroSection() {
           We help businesses acquire customers, improve conversions, and scale operations through strategy, design, engineering, and data.
         </p>
 
-        {/* Buttons - Slide in from sides */}
+        {/* Buttons - Slide in from sides, pointer-events-auto ensures clicks register above pixel grid */}
         <div className="flex sm:flex-row justify-center gap-3 sm:gap-[7.644px] items-center w-full sm:w-auto px-4 sm:px-0">
-          <button 
-            className="flex items-center justify-center px-[15px] py-[12px] md:px-[27.931px] md:py-[16.465px] rounded-[76.435px] bg-[#fdc60a] relative overflow-hidden group"
+          <button
+            className="flex items-center justify-center px-6 py-2.5 md:px-[27.931px] md:py-[16.465px] rounded-[76.435px] bg-[#fdc60a] relative overflow-hidden group transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-[#fdc60a]/30 active:scale-95 active:duration-150 pointer-events-auto"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0) scale(1)' : 'translateX(-30px) scale(0.9)',
@@ -125,15 +125,12 @@ export function HeroSection() {
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#fdd040] to-[#fdc60a] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-            <p className="relative z-10 font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-[10.701px] text-nowrap text-white transition-transform duration-300 ease-out group-hover:scale-105">
+            <span className="relative z-10 flex items-center gap-2 font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-xs sm:text-sm md:text-base text-nowrap text-white">
               Discuss Your Project
-            </p>
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="absolute inset-0 shadow-lg shadow-[#fdc60a]/30 rounded-[76.435px]" />
-            </div>
+            </span>
           </button>
-          <button 
-            className="flex items-center justify-center px-[15px] py-[12px] md:px-[27.931px] md:py-[16.465px] rounded-[76.435px] bg-[#ff6730] relative overflow-hidden group"
+          <button
+            className="flex items-center justify-center px-6 py-2.5 md:px-[27.931px] md:py-[16.465px] rounded-[76.435px] bg-[#ff6730] relative overflow-hidden group transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-[#ff6730]/30 active:scale-95 active:duration-150 pointer-events-auto"
             style={{
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0) scale(1)' : 'translateX(30px) scale(0.9)',
@@ -141,12 +138,9 @@ export function HeroSection() {
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#ff7845] to-[#ff6730] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-            <span className="relative z-10 flex items-center gap-2 group-hover:-translate-x-1 transition-transform font-['Cabinet_Grotesk:Regular',sans-serif] text-[10.701px] text-nowrap text-white">
+            <span className="relative z-10 flex items-center gap-2 font-['Cabinet_Grotesk:Regular',sans-serif] leading-[normal] not-italic text-xs sm:text-sm md:text-base text-nowrap text-white">
               View Our Framework
             </span>
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="absolute inset-0 shadow-lg shadow-[#ff6730]/30 rounded-[76.435px]" />
-            </div>
           </button>
         </div>
       </div>

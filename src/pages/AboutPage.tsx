@@ -49,7 +49,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-20">
+      {/* <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-20">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
           <div style={animStyle(0.3)}>
             <h2 className="font-cabinet font-bold text-2xl sm:text-3xl lg:text-[36px] text-[#1a1a1a] mb-4 leading-tight">
@@ -73,10 +73,10 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Values Section */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-20 bg-[#fafafa]">
+      {/* <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-20 bg-[#fafafa]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12" style={animStyle(0.2)}>
             <h2 className="font-cabinet font-bold text-2xl sm:text-3xl lg:text-[36px] text-[#1a1a1a] mb-3">
@@ -132,10 +132,10 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-20">
+      {/* <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-20">
         <div className="max-w-3xl mx-auto text-center" style={animStyle(0.2)}>
           <h2 className="font-cabinet font-bold text-2xl sm:text-3xl lg:text-[40px] text-[#1a1a1a] mb-4 leading-tight">
             Ready to Grow Your Business{' '}
@@ -153,7 +153,7 @@ export default function AboutPage() {
             Book a Growth Call
           </a>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/poioteslogo.svg';
-import Mascot from '../assets/mascot.png';
+import Mascot from '../assets/mascot.avif';
 import { GeometricArt } from '../components/GeometricArt';
 
 export default function CompleteProfilePage() {
@@ -48,8 +48,8 @@ export default function CompleteProfilePage() {
             </div>
 
             {/* Form */}
-            <form onSubmit={(e) => { 
-              e.preventDefault(); 
+            <form onSubmit={(e) => {
+              e.preventDefault();
               const name = fullName || email.split('@')[0];
               const initials = name.charAt(0).toUpperCase();
               localStorage.setItem('poietes_user', JSON.stringify({ email, name, initials }));

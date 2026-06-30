@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/poioteslogo.svg';
-import Mascot from '../assets/mascot.png';
+import Mascot from '../assets/mascot.avif';
 import { GeometricArt } from '../components/GeometricArt';
 
 export default function SignUpPage() {

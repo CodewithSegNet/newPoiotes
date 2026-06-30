@@ -18,11 +18,11 @@ function Layout() {
 
   return (
     <div className="relative min-h-screen bg-white">
-      <CookieBanner />
+      {!isProfilePage && <CookieBanner />}
       <Navigation />
       <Outlet />
       {!isProfilePage && <CTAFooter />}
-      <Footer />
+      {!isProfilePage && <Footer />}
     </div>
   );
 }

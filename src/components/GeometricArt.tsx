@@ -15,8 +15,8 @@ export function GeometricArt() {
       <svg className="absolute w-full h-full opacity-[0.015]" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="hex-grid" width="60" height="103.923" patternUnits="userSpaceOnUse" patternTransform="scale(0.5)">
-            <path d="M30 0l25.98 15v30L30 60 4.02 45V15z" fill="none" stroke="#1a1a1a" strokeWidth="1"/>
-            <path d="M30 103.923l25.98-15v-30l-25.98-15-25.98 15v30z" fill="none" stroke="#1a1a1a" strokeWidth="1"/>
+            <path d="M30 0l25.98 15v30L30 60 4.02 45V15z" fill="none" stroke="#1a1a1a" strokeWidth="1" />
+            <path d="M30 103.923l25.98-15v-30l-25.98-15-25.98 15v30z" fill="none" stroke="#1a1a1a" strokeWidth="1" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#hex-grid)" />
@@ -40,7 +40,7 @@ export function GeometricArt() {
         <line x1="720" y1="0" x2="720" y2="900" stroke="#1a1a1a" strokeWidth="0.5" strokeDasharray="8 16" />
         {/* Diagonal construction line */}
         <line x1="0" y1="900" x2="1440" y2="0" stroke="#1a1a1a" strokeWidth="0.3" strokeDasharray="4 12" />
-        
+
         {/* Data sine waves */}
         <path d="M 0 600 Q 360 400 720 600 T 1440 600" stroke="#1a1a1a" strokeWidth="0.5" fill="none" strokeDasharray="2 4" />
         <path d="M 0 620 Q 360 420 720 620 T 1440 620" stroke="#FF6730" strokeWidth="0.3" fill="none" opacity="0.6" />
@@ -70,12 +70,12 @@ export function GeometricArt() {
         <circle cx="350" cy="350" r="340" fill="none" stroke="#1a1a1a" strokeWidth="0.5" strokeDasharray="1 6" />
         {/* Radial Spokes */}
         {Array.from({ length: 12 }).map((_, i) => (
-          <line 
-            key={i} 
-            x1="350" y1="350" 
-            x2={350 + 340 * Math.cos((i * 30 * Math.PI) / 180)} 
-            y2={350 + 340 * Math.sin((i * 30 * Math.PI) / 180)} 
-            stroke="#1a1a1a" strokeWidth="0.3" strokeDasharray="2 8" 
+          <line
+            key={i}
+            x1="350" y1="350"
+            x2={350 + 340 * Math.cos((i * 30 * Math.PI) / 180)}
+            y2={350 + 340 * Math.sin((i * 30 * Math.PI) / 180)}
+            stroke="#1a1a1a" strokeWidth="0.3" strokeDasharray="2 8"
           />
         ))}
       </svg>
@@ -88,7 +88,7 @@ export function GeometricArt() {
         <circle cx="350" cy="220" r="3" fill="#1a1a1a" />
         <circle cx="100" cy="280" r="4" fill="#1a1a1a" />
         <circle cx="220" cy="350" r="3" fill="#FF6730" />
-        
+
         <line x1="50" y1="50" x2="150" y2="120" stroke="#1a1a1a" strokeWidth="0.5" />
         <line x1="150" y1="120" x2="280" y2="80" stroke="#1a1a1a" strokeWidth="0.5" />
         <line x1="280" y1="80" x2="350" y2="220" stroke="#1a1a1a" strokeWidth="0.5" />
@@ -122,9 +122,14 @@ export function GeometricArt() {
         <path d="M 20 120 L 20 20 L 120 20" stroke="#1a1a1a" strokeWidth="0.5" strokeDasharray="2 4" />
       </svg>
 
-      {/* 11. Data Points & Crosshair Markers */}
-      <div className="absolute top-[20%] left-[25%] opacity-[0.08] text-[#1a1a1a] text-xs font-mono tracking-widest glow-tl transition-all duration-300 z-20">+ $45.2M REV</div>
-      <div className="absolute bottom-[25%] right-[20%] opacity-[0.08] text-[#1a1a1a] text-xs font-mono tracking-widest glow-br transition-all duration-300 z-20">+ $12.8M ARR</div>
+      {/* 11. Tech Stack & Data Points */}
+      <div className="absolute top-[20%] left-[25%] opacity-[0.08] text-[#1a1a1a] text-xs font-mono tracking-widest glow-tl transition-all duration-300 z-20">DEVOPS</div>
+      <div className="absolute bottom-[25%] right-[20%] opacity-[0.08] text-[#1a1a1a] text-xs font-mono tracking-widest glow-br transition-all duration-300 z-20">FRONTEND</div>
+      <div className="absolute top-[15%] right-[25%] opacity-[0.06] text-[#1a1a1a] text-[10px] font-mono tracking-widest transition-all duration-300 z-20">UX/UI</div>
+      <div className="absolute bottom-[15%] left-[20%] opacity-[0.06] text-[#1a1a1a] text-[10px] font-mono tracking-widest transition-all duration-300 z-20">FIGMA</div>
+      <div className="absolute top-[45%] left-[10%] opacity-[0.05] text-[#1a1a1a] text-[10px] font-mono tracking-widest transition-all duration-300 z-20">CI/CD</div>
+      <div className="absolute top-[60%] right-[12%] opacity-[0.05] text-[#1a1a1a] text-[10px] font-mono tracking-widest transition-all duration-300 z-20">BACKEND</div>
+      <div className="absolute top-[80%] left-[40%] opacity-[0.04] text-[#1a1a1a] text-[10px] font-mono tracking-widest transition-all duration-300 z-20">MONITORING</div>
       <div className="absolute top-[35%] right-[35%] opacity-[0.15] text-[#FF6730] text-lg font-light leading-none">+</div>
       <div className="absolute bottom-[20%] left-[35%] opacity-[0.1] text-[#1a1a1a] text-lg font-light leading-none">+</div>
       <div className="absolute top-[55%] left-[8%] opacity-[0.12] text-[#fdc60a] text-lg font-light leading-none">+</div>
@@ -166,22 +171,22 @@ export function GeometricArt() {
 
       {/* 12. Services Technical Readouts */}
       <div className="absolute top-[15%] right-[20%] opacity-[0.08] text-[#1a1a1a] text-[10px] font-mono leading-relaxed tracking-wider glow-tr transition-all duration-300 z-20">
-        // CORE_SERVICES<br/>
-        ENG.SOFTWARE_DEV<br/>
-        STR.GROWTH_SYSTEMS<br/>
+        // CORE_SERVICES<br />
+        ENG.SOFTWARE_DEV<br />
+        STR.GROWTH_SYSTEMS<br />
         DAT.ANALYTICS_OPT
       </div>
       <div className="absolute bottom-[18%] left-[20%] opacity-[0.08] text-[#1a1a1a] text-[10px] font-mono leading-relaxed tracking-wider glow-bl transition-all duration-300 z-20">
-        // CAPABILITIES<br/>
-        APP_BUILD: TRUE<br/>
-        SEO_OPT: ACTIVE<br/>
+        // CAPABILITIES<br />
+        APP_BUILD: TRUE<br />
+        SEO_OPT: ACTIVE<br />
         CONV_RATE: MAX
       </div>
 
       {/* Animated Torch Light */}
-      <div 
-        className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full -translate-x-1/2 -translate-y-1/2 blur-[100px] pointer-events-none torch-light z-10" 
-        style={{ 
+      <div
+        className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full -translate-x-1/2 -translate-y-1/2 blur-[100px] pointer-events-none torch-light z-10"
+        style={{
           background: 'radial-gradient(circle, rgba(255,103,48,0.15) 0%, rgba(253,198,10,0.05) 40%, transparent 70%)',
           willChange: 'transform'
         }}
@@ -200,10 +205,10 @@ export function GeometricArt() {
       <svg className="absolute top-[30%] right-0 w-[400px] h-[300px] opacity-[0.03]" viewBox="0 0 400 300">
         <path d="M 400 50 L 300 50 L 250 100 L 100 100" fill="none" stroke="#1a1a1a" strokeWidth="1" />
         <circle cx="100" cy="100" r="3" fill="#FF6730" />
-        
+
         <path d="M 400 80 L 320 80 L 280 120 L 50 120" fill="none" stroke="#1a1a1a" strokeWidth="0.5" strokeDasharray="2 2" />
         <circle cx="50" cy="120" r="2" fill="#1a1a1a" />
-        
+
         <path d="M 400 200 L 250 200 L 200 150 L 80 150" fill="none" stroke="#fdc60a" strokeWidth="1" />
         <circle cx="80" cy="150" r="3" fill="#fdc60a" />
       </svg>

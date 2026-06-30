@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "!./node_modules/**" ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", "!./node_modules/**"],
   theme: {
     extend: {
       colors: {
@@ -12,11 +12,11 @@ export default {
         regular3: "rgba(255, 255, 255, 0.6)",
         newgray: "#181818",
       },
-fontFamily: {
-  'cabinet': ['Cabinet Grotesk', 'sans-serif'],
-  'satoshi': ['Satoshi', 'sans-serif'],
-  'montserrat': ['Montserrat', 'sans-serif'],
-},
+      fontFamily: {
+        'cabinet': ['Cabinet Grotesk', 'sans-serif'],
+        'satoshi': ['Satoshi', 'sans-serif'],
+        'montserrat': ['Montserrat', 'sans-serif'],
+      },
       fontWeight: {
         'thin': '100',
         'extralight': '200',
@@ -40,7 +40,7 @@ fontFamily: {
           '0%': { transform: 'translateX(-50%)' },
           '100%': { transform: 'translateX(0)' },
         },
-            heartbeat: {
+        heartbeat: {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.1)' },
         }
@@ -48,7 +48,7 @@ fontFamily: {
       animation: {
         scroll: 'scroll 90s linear infinite',
         'scroll-rtl': 'scroll-rtl 90s linear infinite',
-                heartbeat: 'heartbeat 2s ease-in-out infinite',
+        heartbeat: 'heartbeat 2s ease-in-out infinite',
 
       },
       boxShadow: {
@@ -64,10 +64,26 @@ fontFamily: {
       screens: {
         "1xl": "1280px",
         "2xl": "1440px",
+        "3xl": "1600px",
+        "4xl": "1800px",
+        "5xl": "2000px",
+        "6xl": "2200px",
+        "7xl": "2400px",
+        "8xl": "2600px",
+        "9xl": "2800px",
+        "10xl": "3000px",
       },
       maxWidth: {
         "screen-2xl": "1440px",
         "screen-1xl": "1280px",
+        "screen-3xl": "1600px",
+        "screen-4xl": "1800px",
+        "screen-5xl": "2000px",
+        "screen-6xl": "2200px",
+        "screen-7xl": "2400px",
+        "screen-8xl": "2600px",
+        "screen-9xl": "2800px",
+        "screen-10xl": "3000px",
       },
       lineHeight: {
         "extra-tight": "1.1px",

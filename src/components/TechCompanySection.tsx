@@ -26,6 +26,24 @@ export function TechCompanySection() {
   const [isTablet, setIsTablet] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
+  // Desktop card sizing — now tracked in state so it recalculates on resize
+  const [desktopCardWidth] = useState(400);
+  const [cardGap] = useState(16);
+
+  // Dynamic runway height (replaces hardcoded h-[300vh])
+  const [runwayHeight, setRunwayHeight] = useState<number>(0);
+  const [maxTranslate, setMaxTranslate] = useState<number>(0);
+
+  // How many vertical scroll px are needed per horizontal px translated.
+  // Higher = more scroll distance per card = slower, smoother feel.
+  const SCROLL_SPEED = 3.2;
+
+  // Eased/lerped progress — smooths out the jump between scroll events
+  // instead of snapping translateX directly to the raw scroll position.
+  const [smoothProgress, setSmoothProgress] = useState(0);
+  const targetProgressRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+
   // Track screen size
   useEffect(() => {
     const checkSize = () => {
@@ -50,17 +68,45 @@ export function TechCompanySection() {
     return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
   }, []);
 
-  // Desktop: scroll-linked horizontal slide
+  // Recalculate runway height + maxTranslate whenever screen size changes.
+  // This keeps the scroll distance proportional to the actual horizontal
+  // distance the cards need to travel at the current viewport width,
+  // instead of a fixed 300vh that's wrong on lg/xl/xxl screens.
+  useEffect(() => {
+    if (!isDesktop) return;
+
+    const calcLayout = () => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const servicesCount = 5; // keep in sync with services.length
+      const totalTrackWidth = servicesCount * (desktopCardWidth + cardGap) - cardGap;
+      const computedMaxTranslate = Math.max(0, totalTrackWidth - vw + 80);
+
+      setMaxTranslate(computedMaxTranslate);
+      // one viewport height for the sticky portion + scaled scroll distance
+      setRunwayHeight(vh + computedMaxTranslate * SCROLL_SPEED);
+    };
+
+    calcLayout();
+    window.addEventListener('resize', calcLayout);
+    return () => window.removeEventListener('resize', calcLayout);
+  }, [isDesktop, desktopCardWidth, cardGap]);
+
+  // Desktop: scroll-linked horizontal slide.
+  // We only compute the raw target progress here — the actual animated
+  // value (smoothProgress) is eased toward this target in a rAF loop below,
+  // which is what removes the "too fast / jumpy" feel.
   const handleScroll = useCallback(() => {
     if (!runwayRef.current || !isDesktop) return;
     const rect = runwayRef.current.getBoundingClientRect();
-    const runwayHeight = runwayRef.current.offsetHeight;
+    const runwayHeightPx = runwayRef.current.offsetHeight;
     const viewportHeight = window.innerHeight;
 
     const scrolled = -rect.top;
-    const maxScroll = runwayHeight - viewportHeight;
+    const maxScroll = runwayHeightPx - viewportHeight;
     const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
 
+    targetProgressRef.current = progress;
     setScrollProgress(progress);
     setActiveCard(Math.min(4, Math.floor(progress * 5)));
   }, [isDesktop]);
@@ -69,6 +115,29 @@ export function TechCompanySection() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
+
+  // Easing loop: smoothly interpolates smoothProgress toward targetProgressRef
+  // every frame instead of jumping straight to the raw scroll value.
+  // Lower EASE = smoother/slower catch-up, higher EASE = snappier.
+  useEffect(() => {
+    if (!isDesktop) return;
+    const EASE = 0.08;
+
+    const tick = () => {
+      setSmoothProgress((prev) => {
+        const diff = targetProgressRef.current - prev;
+        // snap when close enough to avoid endless tiny rAF updates
+        if (Math.abs(diff) < 0.0005) return targetProgressRef.current;
+        return prev + diff * EASE;
+      });
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isDesktop]);
 
   // Mobile: track which card is visible via scroll snap
   useEffect(() => {
@@ -105,7 +174,7 @@ export function TechCompanySection() {
     },
     {
       icon: (
-     <img className='h-5 w-5' src={star} alt="" />
+        <img className='h-5 w-5' src={star} alt="" />
       ),
       tag: 'Efficiency',
       title: 'Improve Business Operations',
@@ -117,31 +186,31 @@ export function TechCompanySection() {
     {
       icon: (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
       tag: 'Intelligence',
       title: 'Understand Your Customers',
       description: 'Analytics, User Behavior Tracking, Conversion Analysis, and Business Intelligence turning raw data into strategic insights.',
-      image: cardthree,
+      image: cardone,
       imagePosition: 'bottom' as const,
       gradient: 'radial-gradient(ellipse at bottom left, rgba(6, 182, 212, 0.4) 0%, transparent 50%)',
     },
     {
       icon: (
-     <img className='h-5 w-5' src={bell} alt="" />
+        <img className='h-5 w-5' src={bell} alt="" />
       ),
       tag: 'Growth',
       title: 'Increase Digital Visibility',
       description: 'SEO Research, Competitor Analysis, Technical SEO, Content Strategy, and Search Performance Optimization to capture high-intent traffic.',
-      image: cardone,
+      image: cardthree,
       imagePosition: 'bottom' as const,
       gradient: 'radial-gradient(ellipse at bottom left, rgba(231, 48, 2, 0.3) 0%, transparent 50%)',
     },
     {
       icon: (
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#9333EA"/>
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="#9333EA" />
         </svg>
       ),
       tag: 'Reliability',
@@ -153,13 +222,10 @@ export function TechCompanySection() {
     },
   ];
 
-  // Desktop: calculate translation for scroll-driven animation
-  const desktopCardWidth = 400;
-  const cardGap = 16;
-  const totalTrackWidth = services.length * (desktopCardWidth + cardGap) - cardGap;
-  const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-  const maxTranslate = Math.max(0, totalTrackWidth - viewportWidth + 80);
-  const translateX = -scrollProgress * maxTranslate;
+  // Desktop: calculate translation for scroll-driven animation.
+  // Uses smoothProgress (eased via rAF) instead of raw scrollProgress so the
+  // cards glide rather than snapping to every scroll tick.
+  const translateX = -smoothProgress * maxTranslate;
 
   // Responsive card sizes
   const mobileCardWidth = isMobile ? 280 : 340; // 280 phone, 340 tablet
@@ -174,11 +240,10 @@ export function TechCompanySection() {
     >
       {/* Card */}
       <div
-        className={`rounded-2xl pt-8 px-8 flex flex-col justify-between relative overflow-hidden border border-white/5 w-full transition-all duration-500 ${
-          !isMobileCard
-            ? activeCard === index ? 'border-white/15 scale-[1.02]' : 'opacity-70 scale-100'
-            : 'border-white/10'
-        }`}
+        className={`rounded-2xl pt-8 px-8 flex flex-col justify-between relative overflow-hidden border border-white/5 w-full transition-all duration-500 ${!isMobileCard
+          ? activeCard === index ? 'border-white/15 scale-[1.02]' : 'opacity-70 scale-100'
+          : 'border-white/10'
+          }`}
         style={{
           height: isMobileCard ? mobileCardHeight : '520px',
           background: service.gradient,
@@ -211,7 +276,7 @@ export function TechCompanySection() {
             {service.title}
           </h3>
 
-          <p className="text-white/50 text-xs leading-relaxed mb-3">
+          <p className="text-white/50 text-xs lg:text-sm leading-relaxed mb-3">
             {service.description}
           </p>
 
@@ -228,11 +293,10 @@ export function TechCompanySection() {
       </div>
 
       {/* Card number */}
-      <div className={`mt-5 w-10 h-10 rounded-full flex items-center justify-center text-sm font-cabinet font-semibold transition-all duration-400 ${
-        activeCard === index
-          ? 'bg-[#FF6730] text-white scale-110'
-          : 'border border-white/30 text-white/50 scale-100'
-      }`}>
+      <div className={`mt-5 w-10 h-10 rounded-full flex items-center justify-center text-sm font-cabinet font-semibold transition-all duration-400 ${activeCard === index
+        ? 'bg-[#FF6730] text-white scale-110'
+        : 'border border-white/30 text-white/50 scale-100'
+        }`}>
         {String(index + 1).padStart(2, '0')}
       </div>
     </div>
@@ -241,7 +305,7 @@ export function TechCompanySection() {
   return (
     <section ref={sectionRef} className="relative w-full overflow-visible z-10">
       {/* Curved dark top with ribbon images */}
-      <div className="relative overflow-visible md:h-[180px] lg:h-[250px]">
+      <div className="relative overflow-visible md:h-[125px] lg:h-[165px] xl:h-[250px] 3xl:h-[270px] 4xl:h-[400px]">
         <div className="relative w-full h-full overflow-visible">
           <div>
             <img className='' src={trys} alt="" />
@@ -305,11 +369,10 @@ export function TechCompanySection() {
               {services.map((_, index) => (
                 <button
                   key={index}
-                  className={`rounded-full transition-all duration-300 ${
-                    activeCard === index
-                      ? 'w-6 h-2 bg-[#FF6730]'
-                      : 'w-2 h-2 bg-white/30'
-                  }`}
+                  className={`rounded-full transition-all duration-300 ${activeCard === index
+                    ? 'w-6 h-2 bg-[#FF6730]'
+                    : 'w-2 h-2 bg-white/30'
+                    }`}
                   onClick={() => {
                     if (mobileTrackRef.current) {
                       const cardW = mobileCardWidth + 16; // card width + gap
@@ -328,14 +391,18 @@ export function TechCompanySection() {
 
         {/* ══════ DESKTOP: Scroll-driven horizontal animation ══════ */}
         {isDesktop && (
-          <div ref={runwayRef} className="relative h-[300vh]">
+          <div
+            ref={runwayRef}
+            className="relative"
+            style={{ height: runwayHeight ? `${runwayHeight}px` : '300vh' }} // fallback before first measurement
+          >
             <div
               ref={stickyRef}
               className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center"
             >
               <div
-                className="flex gap-4 pl-20 transition-transform duration-100 ease-out items-stretch"
-                style={{ transform: `translateX(${translateX}px)` }}
+                className="flex gap-4 pl-20 items-stretch"
+                style={{ transform: `translateX(${translateX}px)`, willChange: 'transform' }}
               >
                 {services.map((service, index) => renderCard(service, index, false))}
               </div>
